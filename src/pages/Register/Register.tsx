@@ -63,7 +63,7 @@ const Register = () => {
             value={data.password}
           />
           <button className='btn-primary' onClick={() => handleSubmit()}>
-            Register
+            Create account
           </button>
         </section>
       </section>
