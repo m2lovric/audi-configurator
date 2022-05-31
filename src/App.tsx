@@ -1,7 +1,7 @@
 function App() {
   return (
     <main className='App'>
-      <section> </section>
+      <section>Home</section>
     </main>
   );
 }
