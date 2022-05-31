@@ -1,0 +1,29 @@
+@use './variables.scss' as v;
+
+.input-label {
+  color: v.$text-1;
+  font-size: 18px;
+  margin: 20px 0 4px 0;
+}
+
+.input-lg {
+  border: 1px solid v.$border-5;
+  padding: 16px 12px;
+  font-size: 18px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+
+  &::placeholder {
+    color: v.$text-5;
+  }
+}
+
+.btn-primary {
+  color: v.$icon-6;
+  padding: 12px 20px;
+  font-size: 18px;
+  font-weight: 700;
+  background-color: v.$primary;
+  border: none;
+  cursor: pointer;
+}
