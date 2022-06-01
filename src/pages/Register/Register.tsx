@@ -3,9 +3,14 @@ import { Layout } from '../../components';
 import './style.scss';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../../modules/firebase';
+import { useRecoilState } from 'recoil';
+import { userStateAtom } from '../../../modules/state/atoms';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [data, setData] = useState({ name: '', email: '', password: '' });
+  const [userState, setUserState] = useRecoilState(userStateAtom);
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     console.log('click');
@@ -15,6 +20,8 @@ const Register = () => {
         updateProfile(user, { displayName: data.name });
         setData({ name: '', email: '', password: '' });
         console.log(user);
+        setUserState(true);
+        navigate('/');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -27,6 +34,9 @@ const Register = () => {
     <Layout>
       <section className='register'>
         <section className='register__form'>
+          <Link to={'/login'} className='btn-primary'>
+            Login
+          </Link>
           <label htmlFor='name' className='input-label'>
             Name
           </label>

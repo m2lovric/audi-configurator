@@ -3,9 +3,14 @@ import { Layout } from '../../components';
 import './login.scss';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../modules/firebase';
+import { userStateAtom } from '../../../modules/state/atoms';
+import { useRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
+  const [userState, setUserState] = useRecoilState(userStateAtom);
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     console.log('click');
@@ -13,6 +18,8 @@ const Login = () => {
       .then((res) => {
         setData({ email: '', password: '' });
         console.log(res.user);
+        setUserState(true);
+        navigate('/');
       })
       .catch((error) => {
         const errorCode = error.code;
