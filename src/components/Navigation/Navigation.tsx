@@ -6,8 +6,10 @@ import './style.scss';
 const Navigation = () => {
   return (
     <nav className='nav'>
-      <img src={logo} alt='logo' className='nav__logo' />
-      <img src={hamburger} alt='menu' />
+      <section className='container'>
+        <img src={logo} alt='logo' className='nav__logo' />
+        <img src={hamburger} alt='menu' className='nav__menu' />
+      </section>
     </nav>
   );
 };

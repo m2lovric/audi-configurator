@@ -48,7 +48,7 @@ const Login = () => {
             onChange={(e) => setData({ ...data, password: e.target.value })}
             value={data.password}
           />
-          <button className='btn-primary' onClick={() => handleSubmit()}>
+          <button className='btn-primary-lg' onClick={() => handleSubmit()}>
             Login
           </button>
         </section>
