@@ -1,0 +1,40 @@
+@use './scss/variables.scss' as v;
+
+.home {
+  max-width: 1440px;
+  height: calc(100vh - 80px);
+  margin: 0 auto;
+  padding: 82px 156px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__heading {
+    font-size: 24px;
+    font-weight: 300;
+  }
+
+  &__img {
+    margin: 172px 0 24px 0;
+    opacity: 0.1;
+  }
+
+  &__text {
+    font-size: 20px;
+    color: v.$text-3;
+    font-weight: 300;
+    width: 40%;
+    text-align: center;
+
+    span {
+      color: v.$primary;
+      font-weight: 700;
+    }
+  }
+}
