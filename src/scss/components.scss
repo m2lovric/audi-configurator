@@ -2,8 +2,8 @@
 
 .input-label {
   color: v.$text-1;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 300;
   margin: 20px 0 4px 0;
 }
 
@@ -13,6 +13,7 @@
   font-size: 16px;
   border-radius: 3px;
   margin-bottom: 20px;
+  font-weight: 300;
 
   &::placeholder {
     color: v.$text-5;
@@ -25,16 +26,20 @@
   background-color: v.$primary;
   border: none;
   cursor: pointer;
+  text-decoration: none;
 
   &-primary-lg {
     @extend .btn;
     width: 100%;
     font-size: 16px;
+    padding: 20px 0;
   }
 
   &-primary {
     @extend .btn;
     padding: 12px 20px;
     font-size: 14px;
+    max-width: max-content;
+    
   }
 }

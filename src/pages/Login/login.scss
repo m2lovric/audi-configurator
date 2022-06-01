@@ -1,9 +1,11 @@
 .login {
   display: flex;
   justify-content: center;
+  height: calc(100vh - 80px);
 
   &__form {
     width: 520px;
+    padding-top: 120px;
     display: flex;
     flex-flow: column;
   }
