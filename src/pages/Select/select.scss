@@ -1,0 +1,29 @@
+@use '../../scss/variables.scss' as v;
+
+.select {
+  width: 1440px;
+  margin: 0 auto;
+  padding: 80px 156px;
+  height: calc(100vh - 80px);
+
+  &__title {
+    font-weight: 300;
+  }
+
+  &__sub {
+    font-size: 14px;
+    margin: 16px 0 60px 0;
+    color: v.$text-3;
+  }
+
+  &__carousel {
+    width: 100%;
+    overflow: hidden;
+    cursor: grab;
+  }
+
+  &__cars {
+    display: flex;  
+    margin-left: -16px;
+  }
+}

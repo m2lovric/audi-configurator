@@ -1,0 +1,33 @@
+@use '../../scss/variables.scss' as v;
+.car {
+  width: 480px;
+  height: 600px;
+  margin: 0 16px;
+  position: relative;
+  background-color: v.$background-2;
+  overflow: hidden;
+  padding: 40px;
+
+  &__img {
+    height: auto;    
+    width: 300%;
+    margin-left: -145%;
+    margin-top: -15%;
+  }
+
+  &__year {
+    color: v.$text-3;
+    font-size: 28px;
+    line-height: 32px;
+    font-family: 'OpticianSans';
+  }
+  
+  &__model {
+    color: v.$text-1;
+    font-size: 48px;
+    line-height: 44px;
+    font-weight: 700;
+    margin: 0 0 32px 0;
+    font-family: 'OpticianSans';
+  }
+}

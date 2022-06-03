@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { Layout } from '../../components';
+import { Layout, Car } from '../../components';
 import { collection, query, getDocs, DocumentData } from 'firebase/firestore';
 import { db } from '../../../modules/firebase';
+import { CarI } from '../../components/Car/Car';
+import './select.scss';
+import { motion } from 'framer-motion';
 
 const Select = () => {
-  const [models, setModels] = useState<DocumentData>([]);
+  const [models, setModels] = useState<CarI[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const q = query(collection(db, 'models'));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setModels((oldArr) => [...oldArr, { ...doc.data(), id: doc.id }]);
-      });
-    };
-
     fetchData();
   }, []);
 
+  const fetchData = async () => {
+    console.log('fetched');
+    const querySnapshot = await getDocs(collection(db, 'models'));
+    querySnapshot.forEach((doc: any) => {
+      setModels((oldArr) => [...oldArr, { ...doc.data(), id: doc.id }]);
+    });
+  };
+
   return (
     <Layout>
-      {models
-        ? models.map((el: any) => <article key={el.id}>{el.model}</article>)
-        : ''}
+      <section className='select'>
+        <h2 className='select__title'>Configure a car</h2>
+        <p className='select__sub'>
+          Pick you favorite model and start configuring.
+        </p>
+        <motion.div className='carousel select__carousel'>
+          <motion.div
+            drag='x'
+            dragConstraints={{ right: 0 }}
+            className='inner-carousel select__cars '
+          >
+            {models ? models.map((el: any) => <Car data={el} />) : ''}
+          </motion.div>
+        </motion.div>
+      </section>
     </Layout>
   );
 };
