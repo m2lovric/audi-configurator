@@ -1,0 +1,51 @@
+@use '../../scss/variables.scss' as v;
+
+.exterior {
+  display: flex;
+  height: calc(100vh - 160px) ;
+  background-color: v.$text-1;
+
+  &__slider {
+    width: 75%;
+    background-color: v.$background;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__container {
+      height: 340px;
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &__aside {
+    width: 25%;
+    background-color: v.$background-2;
+  }
+}
+
+.splide__arrows {
+  width: 20%;
+  margin: 100px auto 0 auto;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  align-items: center;
+}
+
+.splide__arrow {
+  height: 100%;
+  width: 20%;
+}
+
+.splide__pagination {
+  width: 60%;
+  margin: 0 auto;
+}
+

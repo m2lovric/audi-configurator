@@ -2,44 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Layout, Car } from '../../components';
 import { collection, query, getDocs, DocumentData } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
-import { db, storage } from '../../../modules/firebase';
+import { db } from '../../../modules/firebase';
 import { CarI } from '../../components/Car/Car';
 import './select.scss';
 import { motion } from 'framer-motion';
 
 const Select = () => {
   const [models, setModels] = useState<CarI[]>([]);
-
-  const starsRef = ref(
-    storage,
-    `RS5/Car=RS5, View=Side, Color=Red, Wheel Style=One.png`
-  );
-
-  getDownloadURL(starsRef)
-    .then((url) => {
-      console.log(url);
-    })
-    .catch((error) => {
-      // A full list of error codes is available at
-      // https://firebase.google.com/docs/storage/web/handle-errors
-      switch (error.code) {
-        case 'storage/object-not-found':
-          // File doesn't exist
-          break;
-        case 'storage/unauthorized':
-          // User doesn't have permission to access the object
-          break;
-        case 'storage/canceled':
-          // User canceled the upload
-          break;
-
-        // ...
-
-        case 'storage/unknown':
-          // Unknown error occurred, inspect the server response
-          break;
-      }
-    });
 
   useEffect(() => {
     fetchData();
