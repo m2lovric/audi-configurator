@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Layout, ConfiguratorNav, Colors } from '../../components';
+import { Link, useParams } from 'react-router-dom';
+import { Layout, ConfiguratorNav, Colors, Wheels } from '../../components';
 import { db, storage } from '../../../modules/firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './exterior.scss';
 import { collection, getDocs } from 'firebase/firestore';
-import { useRecoilState } from 'recoil';
-import { configModelsAtom } from '../../../modules/state/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { colorsAtom, configModelsAtom } from '../../../modules/state/atoms';
 
 export interface modelConfigI {
   colors: string[];
@@ -19,12 +19,19 @@ const Exterior = () => {
   const { year, model } = useParams();
   const modelShort = model?.split(' ')[1];
   const sides = ['Front', 'Front Left', 'Side', 'Back', 'Back Left'];
+  const colorsState = useRecoilValue(colorsAtom);
 
+  const [visible, setVisible] = useState({ colors: false, wheels: false });
   const [photos, setPhotos] = useState<string[]>([]);
-  const [wheels, setWheels] = useState<Object[]>([]);
   const [fetched, setFetched] = useState(false);
   const [modelConfig, setModelConfig] =
     useRecoilState<modelConfigI>(configModelsAtom);
+
+  const [selectedValues, setSelectedValues] = useState({
+    model: modelShort,
+    color: 'Turbo Blue',
+    wheels: 'One',
+  });
 
   useEffect(() => {
     fetchData();
@@ -87,7 +94,39 @@ const Exterior = () => {
             </div>
           </Splide>
         </section>
-        <aside className='exterior__aside'>{fetched ? <Colors /> : ''}</aside>
+        <aside className='exterior__aside'>
+          <section
+            onClick={() => setVisible({ ...visible, colors: true })}
+            style={{ display: visible.colors ? 'none' : 'block' }}
+          >
+            {colorsState
+              .filter((el) => el.name === selectedValues.color)
+              .map((el) => {
+                return (
+                  <article key={el.name}>
+                    <img src={el.url} alt='car' />
+                    <p>{el.name}</p>
+                    <p>PAINT COLOR</p>
+                  </article>
+                );
+              })}
+          </section>
+          {fetched ? (
+            <div style={{ display: visible.colors ? 'block' : 'none' }}>
+              <Colors />
+            </div>
+          ) : (
+            ''
+          )}
+          {fetched ? (
+            <div style={{ display: visible.wheels ? 'block' : 'none' }}>
+              <Wheels />
+            </div>
+          ) : (
+            ''
+          )}
+          <Link to={'/'}></Link>
+        </aside>
       </section>
     </Layout>
   );
