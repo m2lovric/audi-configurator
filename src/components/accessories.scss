@@ -1,0 +1,31 @@
+@use '../scss/variables.scss' as v;
+
+.accessories {
+  display: flex;
+  align-items: center;
+  padding: 20px 40px;
+
+  img {
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+  }
+
+  &__text {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__name {
+    font-size: 16px;
+    color: v.$text-1;
+  }
+
+  &__price {
+    font-size: 14px;
+    color: v.$text-3;
+  }
+}
