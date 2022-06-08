@@ -15,7 +15,6 @@ const Select = () => {
   }, []);
 
   const fetchData = async () => {
-    console.log('fetched');
     const querySnapshot = await getDocs(collection(db, 'models'));
     querySnapshot.forEach((doc: any) => {
       setModels((oldArr) => [...oldArr, { ...doc.data(), id: doc.id }]);
