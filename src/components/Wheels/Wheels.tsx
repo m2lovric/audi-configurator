@@ -1,28 +1,27 @@
 import { getDownloadURL, ref } from 'firebase/storage';
-import React, { useState, useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import { storage } from '../../../modules/firebase';
-import { configModelsAtom, colorsAtom } from '../../../modules/state/atoms';
-import '../accessories.scss';
+import { configModelsAtom } from '../../../modules/state/atoms';
 
-const Colors = () => {
+const Wheels = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
-  console.log('modelConfig', modelConfig);
-  const [colors, setColors] =
-    useRecoilState<{ name: string; url: string; price: number }[]>(colorsAtom);
+  const [wheels, setWheels] = useState<
+    { name: string; url: string; price: number }[]
+  >([]);
 
   useEffect(() => {
-    modelConfig.colors.map((el) => {
-      const starsRef = ref(storage, `color-exterior/Color=${el}.png`);
+    modelConfig.wheels.map((el) => {
+      const starsRef = ref(storage, `wheels/${el}`);
 
       getDownloadURL(starsRef)
         .then((url) => {
-          setColors((oldArr) => [
+          setWheels((oldArr) => [
             ...oldArr,
             {
-              name: el,
+              name: el.split('.')[0],
               url: url,
-              price: 2000,
+              price: 3000,
             },
           ]);
         })
@@ -34,9 +33,8 @@ const Colors = () => {
 
   return (
     <section>
-      <button>X</button>
-      {colors
-        ? colors.map((el) => {
+      {wheels
+        ? wheels.map((el) => {
             return (
               <article key={el.name} className='accessories'>
                 <img src={el.url} alt='' />
@@ -52,4 +50,4 @@ const Colors = () => {
   );
 };
 
-export default Colors;
+export default Wheels;
