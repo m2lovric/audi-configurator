@@ -14,16 +14,19 @@ export interface CarI {
 
 const Car = ({ data }: CarI) => {
   return (
-    <motion.div className='item' key={data.id}>
+    <div>
       <article className='car'>
         <img src={data.image} alt='car' className='car__img' />
         <p className='car__year'>{data.production_year}</p>
         <h2 className='car__model'>{data.model}</h2>
-        <Link to={'/configure'} className='btn-primary'>
+        <Link
+          to={`/configure/exterior/${data.production_year}/${data.model}`}
+          className='btn-primary'
+        >
           Configure Now
         </Link>
       </article>
-    </motion.div>
+    </div>
   );
 };
 
