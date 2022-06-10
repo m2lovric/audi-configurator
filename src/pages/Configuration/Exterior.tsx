@@ -8,7 +8,11 @@ import '@splidejs/react-splide/css';
 import './exterior.scss';
 import { collection, getDocs } from 'firebase/firestore';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { colorsAtom, configModelsAtom } from '../../../modules/state/atoms';
+import {
+  colorsAtom,
+  configModelsAtom,
+  wheelsAtom,
+} from '../../../modules/state/atoms';
 
 export interface modelConfigI {
   colors: string[];
@@ -20,7 +24,9 @@ const Exterior = () => {
   const modelShort = model?.split(' ')[1];
   const sides = ['Front', 'Front Left', 'Side', 'Back', 'Back Left'];
   const colorsState = useRecoilValue(colorsAtom);
+  const wheelsState = useRecoilValue(wheelsAtom);
 
+  const [visibleA, setVisibleA] = useState({ colors: false, wheels: false });
   const [visible, setVisible] = useState({ colors: false, wheels: false });
   const [photos, setPhotos] = useState<string[]>([]);
   const [fetched, setFetched] = useState(false);
@@ -30,7 +36,7 @@ const Exterior = () => {
   const [selectedValues, setSelectedValues] = useState({
     model: modelShort,
     color: 'Turbo Blue',
-    wheels: 'One',
+    wheels: 'Car=RS5, Style=One',
   });
 
   useEffect(() => {
@@ -96,8 +102,13 @@ const Exterior = () => {
         </section>
         <aside className='exterior__aside'>
           <section
-            onClick={() => setVisible({ ...visible, colors: true })}
-            style={{ display: visible.colors ? 'none' : 'block' }}
+            onClick={() => {
+              setVisible({ ...visible, colors: true });
+              setVisibleA({ ...visibleA, colors: true });
+            }}
+            style={{
+              display: visible.colors || visibleA.wheels ? 'none' : 'block',
+            }}
           >
             {colorsState
               .filter((el) => el.name === selectedValues.color)
@@ -107,6 +118,27 @@ const Exterior = () => {
                     <img src={el.url} alt='car' />
                     <p>{el.name}</p>
                     <p>PAINT COLOR</p>
+                  </article>
+                );
+              })}
+          </section>
+          <section
+            onClick={() => {
+              setVisible({ ...visible, wheels: true });
+              setVisibleA({ ...visibleA, wheels: true });
+            }}
+            style={{
+              display: visible.wheels || visibleA.colors ? 'none' : 'block',
+            }}
+          >
+            {wheelsState
+              .filter((el) => el.name === selectedValues.wheels)
+              .map((el) => {
+                return (
+                  <article key={el.name}>
+                    <img src={el.url} alt='car' />
+                    <p>{el.name}</p>
+                    <p>WHEELS</p>
                   </article>
                 );
               })}

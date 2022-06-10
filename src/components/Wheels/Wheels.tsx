@@ -1,14 +1,13 @@
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { storage } from '../../../modules/firebase';
-import { configModelsAtom } from '../../../modules/state/atoms';
+import { configModelsAtom, wheelsAtom } from '../../../modules/state/atoms';
 
 const Wheels = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
-  const [wheels, setWheels] = useState<
-    { name: string; url: string; price: number }[]
-  >([]);
+  const [wheels, setWheels] =
+    useRecoilState<{ name: string; url: string; price: number }[]>(wheelsAtom);
 
   useEffect(() => {
     modelConfig.wheels.map((el) => {
