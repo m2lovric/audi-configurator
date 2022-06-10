@@ -29,3 +29,39 @@
     color: v.$text-3;
   }
 }
+
+.colors {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 160px);
+
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 40px;
+
+    h3 {
+      font-size: 24px;
+      font-weight: 400;
+    }
+  }
+
+  &__btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background-color: transparent;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+}
