@@ -17,3 +17,8 @@ export const colorsAtom = atom({
   key: 'colorsModel',
   default: <{ name: string; url: string; price: number }[]>[],
 });
+
+export const wheelsAtom = atom({
+  key: 'wheelsModel',
+  default: <{ name: string; url: string; price: number }[]>[],
+});
