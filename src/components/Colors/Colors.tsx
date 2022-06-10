@@ -4,10 +4,10 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { storage } from '../../../modules/firebase';
 import { configModelsAtom, colorsAtom } from '../../../modules/state/atoms';
 import '../accessories.scss';
+import cancel from '../../assets/X.png';
 
 const Colors = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
-  console.log('modelConfig', modelConfig);
   const [colors, setColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(colorsAtom);
 
@@ -33,8 +33,13 @@ const Colors = () => {
   }, []);
 
   return (
-    <section>
-      <button>X</button>
+    <section className='colors'>
+      <section className='colors__heading'>
+        <h3>Paint color</h3>
+        <button className='colors__btn'>
+          <img src={cancel} alt='cancel' />
+        </button>
+      </section>
       {colors
         ? colors.map((el) => {
             return (
@@ -48,6 +53,12 @@ const Colors = () => {
             );
           })
         : ''}
+
+      <section className='colors__total'>
+        <p>TOTAL</p>
+        <p>1200000&euro;</p>
+      </section>
+      <button className='btn-primary-lg'>Done</button>
     </section>
   );
 };
