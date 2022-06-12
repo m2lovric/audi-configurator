@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
   padding: 20px 40px;
+  cursor: pointer;
 
   img {
     border-radius: 100%;
@@ -33,7 +34,10 @@
 .colors {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 80px);
+  background-color: v.$background-2;
+  margin-top: -80px;
+  z-index: 1;
 
   &__heading {
     display: flex;
@@ -52,6 +56,7 @@
     height: 20px;
     border: none;
     background-color: transparent;
+    cursor: pointer;
 
     img {
       height: 100%;
