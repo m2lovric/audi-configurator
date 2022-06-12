@@ -12,11 +12,14 @@ import {
   colorsAtom,
   configModelsAtom,
   wheelsAtom,
+  visibleAtom,
+  visibleAtomA,
 } from '../../../modules/state/atoms';
 
 export interface modelConfigI {
   colors: string[];
   wheels: string[];
+  interior: string[];
 }
 
 const Exterior = () => {
@@ -26,8 +29,8 @@ const Exterior = () => {
   const colorsState = useRecoilValue(colorsAtom);
   const wheelsState = useRecoilValue(wheelsAtom);
 
-  const [visibleA, setVisibleA] = useState({ colors: false, wheels: false });
-  const [visible, setVisible] = useState({ colors: false, wheels: false });
+  const [visibleA, setVisibleA] = useRecoilState(visibleAtom);
+  const [visible, setVisible] = useRecoilState(visibleAtomA);
   const [photos, setPhotos] = useState<string[]>([]);
   const [fetched, setFetched] = useState(false);
   const [modelConfig, setModelConfig] =
@@ -114,10 +117,12 @@ const Exterior = () => {
               .filter((el) => el.name === selectedValues.color)
               .map((el) => {
                 return (
-                  <article key={el.name}>
-                    <img src={el.url} alt='car' />
-                    <p>{el.name}</p>
-                    <p>PAINT COLOR</p>
+                  <article key={el.name} className='accessories'>
+                    <img src={el.url} alt='car' className='accessories__img' />
+                    <section className='accessories__text'>
+                      <p className='accessories__name'>{el.name}</p>
+                      <p className='accessories__price'>PAINT COLOR</p>
+                    </section>
                   </article>
                 );
               })}
@@ -135,10 +140,12 @@ const Exterior = () => {
               .filter((el) => el.name === selectedValues.wheels)
               .map((el) => {
                 return (
-                  <article key={el.name}>
-                    <img src={el.url} alt='car' />
-                    <p>{el.name}</p>
-                    <p>WHEELS</p>
+                  <article key={el.name} className='accessories'>
+                    <img src={el.url} alt='car' className='accessories__img' />
+                    <section className='accessories__text'>
+                      <p className='accessories__name'>{el.name}</p>
+                      <p className='accessories__price'>WHEELS</p>
+                    </section>
                   </article>
                 );
               })}
@@ -157,7 +164,13 @@ const Exterior = () => {
           ) : (
             ''
           )}
-          <Link to={'/'}></Link>
+
+          <Link
+            to={`/configure/interior/${year}/${model}`}
+            className='btn-primary-lg'
+          >
+            Interior
+          </Link>
         </aside>
       </section>
     </Layout>
