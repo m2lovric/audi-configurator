@@ -7,6 +7,7 @@
   background-color: v.$background-2;
   display: flex;
   align-items: center;
+  z-index: -1;
   
   &__container {
     width: 1440px;

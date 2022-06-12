@@ -2,14 +2,28 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { storage } from '../../../modules/firebase';
-import { configModelsAtom, colorsAtom } from '../../../modules/state/atoms';
+import {
+  configModelsAtom,
+  colorsAtom,
+  visibleAtom,
+  visibleAtomA,
+} from '../../../modules/state/atoms';
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
 
 const Colors = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
+
+  const [visible, setVisible] = useRecoilState(visibleAtom);
+  const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
+
   const [colors, setColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(colorsAtom);
+
+  const handleCancel = () => {
+    setVisible({ ...visible, colors: false });
+    setVisibleA({ ...visibleA, colors: false });
+  };
 
   useEffect(() => {
     modelConfig.colors.map((el) => {
@@ -36,7 +50,7 @@ const Colors = () => {
     <section className='colors'>
       <section className='colors__heading'>
         <h3>Paint color</h3>
-        <button className='colors__btn'>
+        <button className='colors__btn' onClick={() => handleCancel()}>
           <img src={cancel} alt='cancel' />
         </button>
       </section>
