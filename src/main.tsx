@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
-import { Register, Login, Select, Exterior } from './pages';
+import { Register, Login, Select, Exterior, Interior } from './pages';
 import './scss/main.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -15,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/login' element={<Login />} />
         <Route path='/select' element={<Select />} />
         <Route path='/configure/exterior/:year/:model' element={<Exterior />} />
+        <Route path='/configure/interior/:year/:model' element={<Interior />} />
       </Routes>
     </BrowserRouter>
   </RecoilRoot>
