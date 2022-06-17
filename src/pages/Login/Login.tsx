@@ -13,7 +13,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    console.log('click');
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((res) => {
         setData({ email: '', password: '' });
@@ -32,6 +31,10 @@ const Login = () => {
     <Layout>
       <section className='login'>
         <section className='login__form'>
+          <h1 className='register__title'>
+            AUDI <span>CONFIGURATOR</span>
+          </h1>
+
           <label htmlFor='email' className='input-label'>
             Email
           </label>

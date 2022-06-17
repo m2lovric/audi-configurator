@@ -1,7 +1,24 @@
+@use '../../scss/variables.scss' as v;
+
 .login {
   display: flex;
   justify-content: center;
   height: calc(100vh - 80px);
+
+  &__title {
+      color: v.$text-4;
+      font-family: 'OpticianSans';
+      font-size: 32px;
+      justify-self: flex-start;
+      margin-bottom: 20px;
+  
+      span {
+        margin-left: 6px;
+        font-size: 32px;
+        color: v.$text-1;
+        font-family: 'OpticianSans';
+      }
+    }
 
   &__form {
     width: 520px;

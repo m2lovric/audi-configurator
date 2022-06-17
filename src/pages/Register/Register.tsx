@@ -13,13 +13,11 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleSubmit = () => {
-    console.log('click');
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((res) => {
         const user = res.user;
         updateProfile(user, { displayName: data.name });
         setData({ name: '', email: '', password: '' });
-        console.log(user);
         setUserState(true);
         navigate('/');
       })
@@ -34,9 +32,10 @@ const Register = () => {
     <Layout>
       <section className='register'>
         <section className='register__form'>
-          <Link to={'/login'} className='btn-primary'>
-            Login
-          </Link>
+          <h1 className='register__title'>
+            AUDI <span>CONFIGURATOR</span>
+          </h1>
+
           <label htmlFor='name' className='input-label'>
             Name
           </label>
@@ -75,6 +74,10 @@ const Register = () => {
           <button className='btn-primary-lg' onClick={() => handleSubmit()}>
             Create account
           </button>
+
+          <Link to={'/login'} className='btn-primary'>
+            Login
+          </Link>
         </section>
       </section>
     </Layout>
