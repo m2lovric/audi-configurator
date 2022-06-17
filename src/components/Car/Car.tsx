@@ -2,15 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './car.scss';
 import { motion } from 'framer-motion';
-
-export interface CarI {
-  data: {
-    id: string;
-    image: string;
-    model: string;
-    production_year: number;
-  };
-}
+import { CarI } from '../../../modules/interfaces';
 
 const Car = ({ data }: CarI) => {
   return (
