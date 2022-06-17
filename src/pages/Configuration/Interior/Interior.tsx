@@ -9,8 +9,11 @@ import '../exterior.scss';
 import { collection, getDocs } from 'firebase/firestore';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
+  colorsAtom,
   interiorAtom,
-  configModelsAtom,
+  userConfiguration,
+  visibleInteriorAtom,
+  wheelsAtom,
 } from '../../../../modules/state/atoms';
 
 const Interior = () => {
@@ -18,35 +21,41 @@ const Interior = () => {
   const modelShort = model?.split(' ')[1];
   const sides = ['Dash', 'Seats'];
   const interiorState = useRecoilValue(interiorAtom);
+  const [colorsState, setColorState] = useRecoilState(colorsAtom);
+  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
+
+  const [visibleInterior, setVisibleInterior] =
+    useRecoilState(visibleInteriorAtom);
 
   const [photos, setPhotos] = useState<string[]>([]);
   const [fetched, setFetched] = useState(false);
 
-  const [selectedValues, setSelectedValues] = useState({
-    model: modelShort,
-    color: 'Black&grey',
-  });
+  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
 
   useEffect(() => {
+    setColorState([]);
+    setWheelsState([]);
+    setPhotos([]);
     sides.map((el) => {
       const starsRef = ref(
         storage,
-        `${modelShort}/Car=${modelShort}, Color=Black&grey, View=${el}.png`
+        `${modelShort}/Car=${modelShort}, Color=${selectedValues.accessories.interior}, View=${el}.png`
       );
 
       getDownloadURL(starsRef)
         .then((url) => {
           setPhotos((oldArr) => [...oldArr, url]);
+          setFetched(true);
         })
         .catch((error) => {
           console.log(error);
         });
     });
-  }, []);
+  }, [selectedValues.accessories]);
 
   return (
     <Layout>
-      <ConfiguratorNav model={model} year={year} />
+      <ConfiguratorNav model={model} year={year} active={'interior'} />
       <section className='exterior'>
         <section className='exterior__slider'>
           <Splide hasTrack={false}>
@@ -75,10 +84,18 @@ const Interior = () => {
           </Splide>
         </section>
         <aside className='exterior__aside'>
-          <section onClick={() => {}} style={{}}>
+          <section
+            onClick={() => {
+              setVisibleInterior(true);
+            }}
+            style={{
+              display: visibleInterior ? 'none' : 'block',
+            }}
+          >
             {interiorState
-              .filter((el) => el.name === selectedValues.color)
+              .filter((el) => el.name === selectedValues.accessories.interior)
               .map((el) => {
+                console.log(selectedValues.accessories.interior);
                 return (
                   <article key={el.name} className='accessories'>
                     <img src={el.url} alt='car' className='accessories__img' />
@@ -92,14 +109,17 @@ const Interior = () => {
           </section>
 
           {fetched ? (
-            <div>
+            <div style={{ display: visibleInterior ? 'block' : 'none' }}>
               <InteriorColors />
             </div>
           ) : (
             ''
           )}
 
-          <Link to={'/'} className='btn-primary-lg'>
+          <Link
+            to={`/configure/summary/${year}/${model}`}
+            className='btn-primary-lg'
+          >
             Summary
           </Link>
         </aside>
