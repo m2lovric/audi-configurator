@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { User } from 'firebase/auth';
 
-import { modelConfigI } from '../../src/pages/Configuration/Exterior';
+import { modelConfigI } from '../interfaces/index';
 
 export const userStateAtom = atom({
   key: 'user',
@@ -36,4 +36,26 @@ export const visibleAtom = atom({
 export const visibleAtomA = atom({
   key: 'visibleModelA',
   default: { colors: false, wheels: false },
+});
+
+export const visibleInteriorAtom = atom({
+  key: 'visibleInteriorModel',
+  default: false,
+});
+
+export const userConfiguration = atom({
+  key: 'userConfigModel',
+  default: <
+    {
+      model?: string;
+      accessories: { color: string; interior: string; wheel: string };
+    }
+  >{
+    model: 'RS5',
+    accessories: {
+      color: 'Turbo Blue',
+      interior: 'Black&grey',
+      wheel: 'Style=One',
+    },
+  },
 });
