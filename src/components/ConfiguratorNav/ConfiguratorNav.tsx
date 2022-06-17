@@ -5,19 +5,10 @@ import './configuratorNav.scss';
 interface ConfiguratorNavI {
   model?: string;
   year?: string;
+  active?: string;
 }
 
-const ConfiguratorNav = ({ model, year }: ConfiguratorNavI) => {
-  const activeStyle = {
-    color: '#2E2E38',
-    fontWeight: 700,
-  };
-
-  const disabledStyle = {
-    color: '#2E2E38',
-    fontWeight: 400,
-  };
-
+const ConfiguratorNav = ({ model, year, active }: ConfiguratorNavI) => {
   return (
     <nav className='configurator-nav'>
       <section className='configurator-nav__container'>
@@ -29,21 +20,33 @@ const ConfiguratorNav = ({ model, year }: ConfiguratorNavI) => {
         <section>
           <NavLink
             to={`/configure/exterior/${year}/${model}`}
-            style={({ isActive }) => (isActive ? activeStyle : disabledStyle)}
+            style={
+              active == 'exterior'
+                ? { color: '#2E2E38', fontWeight: 700 }
+                : { color: '#2E2E38', fontWeight: 400 }
+            }
             className='configurator-nav__links'
           >
             01 Exterior
           </NavLink>
           <NavLink
             to={`/configure/interior/${year}/${model}`}
-            style={({ isActive }) => (isActive ? activeStyle : disabledStyle)}
+            style={
+              active == 'interior'
+                ? { color: '#2E2E38', fontWeight: 700 }
+                : { color: '#2E2E38', fontWeight: 400 }
+            }
             className='configurator-nav__links'
           >
             02 Interior
           </NavLink>
           <NavLink
             to={`/configure/summary/${year}/${model}`}
-            style={({ isActive }) => (isActive ? activeStyle : disabledStyle)}
+            style={
+              active == 'summary'
+                ? { color: '#2E2E38', fontWeight: 700 }
+                : { color: '#2E2E38', fontWeight: 400 }
+            }
             className='configurator-nav__links'
           >
             03 Summary
