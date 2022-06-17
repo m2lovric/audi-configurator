@@ -6,6 +6,8 @@ import {
   configModelsAtom,
   colorsAtom,
   interiorAtom,
+  visibleInteriorAtom,
+  userConfiguration,
 } from '../../../modules/state/atoms';
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
@@ -18,8 +20,12 @@ const Colors = () => {
       interiorAtom
     );
 
+  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [visibleInterior, setVisibleInterior] =
+    useRecoilState(visibleInteriorAtom);
+
   const handleCancel = () => {
-    console.log('cancel');
+    setVisibleInterior(false);
   };
 
   useEffect(() => {
@@ -46,7 +52,7 @@ const Colors = () => {
   return (
     <section className='colors'>
       <section className='colors__heading'>
-        <h3>Paint color</h3>
+        <h3>Interior</h3>
         <button className='colors__btn' onClick={() => handleCancel()}>
           <img src={cancel} alt='cancel' />
         </button>
@@ -54,7 +60,19 @@ const Colors = () => {
       {interiorColors
         ? interiorColors.map((el) => {
             return (
-              <article key={el.name} className='accessories'>
+              <article
+                key={el.name}
+                className='accessories'
+                onClick={() =>
+                  setSelectedValues({
+                    ...selectedValues,
+                    accessories: {
+                      ...selectedValues.accessories,
+                      interior: el.name,
+                    },
+                  })
+                }
+              >
                 <img src={el.url} alt='' />
                 <section className='accessories__text'>
                   <p className='accessories__name'>{el.name}</p>
