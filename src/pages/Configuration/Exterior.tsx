@@ -14,54 +14,59 @@ import {
   wheelsAtom,
   visibleAtom,
   visibleAtomA,
+  userConfiguration,
+  interiorAtom,
 } from '../../../modules/state/atoms';
-
-export interface modelConfigI {
-  colors: string[];
-  wheels: string[];
-  interior: string[];
-}
+import { modelConfigI } from '../../../modules/interfaces';
 
 const Exterior = () => {
   const { year, model } = useParams();
   const modelShort = model?.split(' ')[1];
-  const sides = ['Front', 'Front Left', 'Side', 'Back', 'Back Left'];
-  const colorsState = useRecoilValue(colorsAtom);
-  const wheelsState = useRecoilValue(wheelsAtom);
+  const sides = [
+    { id: 1, view: 'Front Left' },
+    { id: 2, view: 'Front' },
+    { id: 3, view: 'Side' },
+    { id: 4, view: 'Back' },
+    { id: 5, view: 'Back Left' },
+  ];
+  const [colorsState, setColorState] = useRecoilState(colorsAtom);
+  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
+  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
 
-  const [visibleA, setVisibleA] = useRecoilState(visibleAtom);
-  const [visible, setVisible] = useRecoilState(visibleAtomA);
-  const [photos, setPhotos] = useState<string[]>([]);
+  const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
+  const [visible, setVisible] = useRecoilState(visibleAtom);
+  const [photos, setPhotos] = useState<{ url: string; id: number }[]>([]);
   const [fetched, setFetched] = useState(false);
   const [modelConfig, setModelConfig] =
     useRecoilState<modelConfigI>(configModelsAtom);
 
-  const [selectedValues, setSelectedValues] = useState({
-    model: modelShort,
-    color: 'Turbo Blue',
-    wheels: 'Car=RS5, Style=One',
-  });
+  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
 
   useEffect(() => {
+    setInteriorState([]);
     fetchData();
-
-    console.log('exterior', modelConfig);
+    setModel();
+    setPhotos([]);
 
     sides.map((el) => {
       const starsRef = ref(
         storage,
-        `${modelShort}/Car=${modelShort}, View=${el}, Color=Blue, Wheel Style=One-1.png`
+        `${modelShort}/Car=${modelShort}, View=${el.view}, Color=${selectedValues.accessories.color}, Wheel ${selectedValues.accessories.wheel}.png`
       );
 
       getDownloadURL(starsRef)
         .then((url) => {
-          setPhotos((oldArr) => [...oldArr, url]);
+          setPhotos((oldArr) => [...oldArr, { url: url, id: el.id }]);
         })
         .catch((error) => {
           console.log(error);
         });
     });
-  }, []);
+  }, [selectedValues.accessories]);
+
+  const setModel = () => {
+    setSelectedValues({ ...selectedValues, model: modelShort });
+  };
 
   const fetchData = async () => {
     const querySnapshot = await getDocs(collection(db, 'config-models'));
@@ -75,20 +80,22 @@ const Exterior = () => {
 
   return (
     <Layout>
-      <ConfiguratorNav model={model} year={year} />
+      <ConfiguratorNav model={model} year={year} active={'exterior'} />
       <section className='exterior'>
         <section className='exterior__slider'>
           <Splide hasTrack={false}>
             <section className='exterior__slider__container'>
               <SplideTrack>
                 {photos
-                  ? photos.map((el, i) => {
-                      return (
-                        <SplideSlide key={i}>
-                          <img src={el} alt='car' />
-                        </SplideSlide>
-                      );
-                    })
+                  ? photos
+                      .sort((a, b) => a.id - b.id)
+                      .map((el) => {
+                        return (
+                          <SplideSlide key={el.id}>
+                            <img src={el.url} alt='car' />
+                          </SplideSlide>
+                        );
+                      })
                   : ''}
               </SplideTrack>
             </section>
@@ -114,7 +121,7 @@ const Exterior = () => {
             }}
           >
             {colorsState
-              .filter((el) => el.name === selectedValues.color)
+              .filter((el) => el.name === selectedValues.accessories.color)
               .map((el) => {
                 return (
                   <article key={el.name} className='accessories'>
@@ -137,7 +144,11 @@ const Exterior = () => {
             }}
           >
             {wheelsState
-              .filter((el) => el.name === selectedValues.wheels)
+              .filter(
+                (el) =>
+                  el.name ===
+                  `Car=${modelShort}, ${selectedValues.accessories.wheel}`
+              )
               .map((el) => {
                 return (
                   <article key={el.name} className='accessories'>
