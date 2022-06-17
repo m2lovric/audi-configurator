@@ -8,10 +8,12 @@ import {
   wheelsAtom,
   visibleAtom,
   visibleAtomA,
+  userConfiguration,
 } from '../../../modules/state/atoms';
 
 const Wheels = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
+  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [wheels, setWheels] =
     useRecoilState<{ name: string; url: string; price: number }[]>(wheelsAtom);
 
@@ -56,7 +58,19 @@ const Wheels = () => {
       {wheels
         ? wheels.map((el) => {
             return (
-              <article key={el.name} className='accessories'>
+              <article
+                key={el.name}
+                className='accessories'
+                onClick={() =>
+                  setSelectedValues({
+                    ...selectedValues,
+                    accessories: {
+                      ...selectedValues.accessories,
+                      wheel: el.name.split(' ')[1],
+                    },
+                  })
+                }
+              >
                 <img src={el.url} alt='' />
                 <section className='accessories__text'>
                   <p className='accessories__name'>{el.name}</p>
