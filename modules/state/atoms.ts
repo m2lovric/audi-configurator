@@ -49,6 +49,7 @@ export const userConfiguration = atom({
     {
       model?: string;
       accessories: { color: string; interior: string; wheel: string };
+      price?: number;
     }
   >{
     model: 'RS5',
@@ -57,5 +58,6 @@ export const userConfiguration = atom({
       interior: 'Black&grey',
       wheel: 'Style=One',
     },
+    price: 70000,
   },
 });
