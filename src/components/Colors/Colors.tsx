@@ -7,6 +7,7 @@ import {
   colorsAtom,
   visibleAtom,
   visibleAtomA,
+  userConfiguration,
 } from '../../../modules/state/atoms';
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
@@ -17,6 +18,7 @@ const Colors = () => {
   const [visible, setVisible] = useRecoilState(visibleAtom);
   const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
 
+  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [colors, setColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(colorsAtom);
 
@@ -57,7 +59,19 @@ const Colors = () => {
       {colors
         ? colors.map((el) => {
             return (
-              <article key={el.name} className='accessories'>
+              <article
+                key={el.name}
+                className='accessories'
+                onClick={() =>
+                  setSelectedValues({
+                    ...selectedValues,
+                    accessories: {
+                      ...selectedValues.accessories,
+                      color: el.name,
+                    },
+                  })
+                }
+              >
                 <img src={el.url} alt='' />
                 <section className='accessories__text'>
                   <p className='accessories__name'>{el.name}</p>
