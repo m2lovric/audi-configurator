@@ -3,7 +3,7 @@ import { Layout, Car } from '../../components';
 import { collection, query, getDocs, DocumentData } from 'firebase/firestore';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { db } from '../../../modules/firebase';
-import { CarI } from '../../components/Car/Car';
+import { CarI } from '../../../modules/interfaces/index';
 import './select.scss';
 import { motion } from 'framer-motion';
 
