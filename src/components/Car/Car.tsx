@@ -32,7 +32,7 @@ const Car = ({ data }: CarI) => {
           accessories: {
             ...selectedValues.accessories,
             color: 'Turbo Blue',
-            interior: 'Black&gray',
+            interior: 'Black&grey',
           },
         });
 
