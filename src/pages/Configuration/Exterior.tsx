@@ -7,7 +7,7 @@ import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './exterior.scss';
 import { collection, getDocs } from 'firebase/firestore';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   colorsAtom,
   configModelsAtom,
@@ -19,16 +19,18 @@ import {
 } from '../../../modules/state/atoms';
 import { modelConfigI } from '../../../modules/interfaces';
 
+export const sides = [
+  { id: 1, view: 'Front Left' },
+  { id: 2, view: 'Front' },
+  { id: 3, view: 'Side' },
+  { id: 4, view: 'Back' },
+  { id: 5, view: 'Back Left' },
+];
+
 const Exterior = () => {
   const { year, model } = useParams();
-  const modelShort = model?.split(' ')[1];
-  const sides = [
-    { id: 1, view: 'Front Left' },
-    { id: 2, view: 'Front' },
-    { id: 3, view: 'Side' },
-    { id: 4, view: 'Back' },
-    { id: 5, view: 'Back Left' },
-  ];
+  let modelShort = model?.split(' ')[1];
+
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
@@ -43,9 +45,9 @@ const Exterior = () => {
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
 
   useEffect(() => {
-    setInteriorState([]);
-    fetchData();
     setModel();
+    fetchData();
+    setInteriorState([]);
     setPhotos([]);
 
     sides.map((el) => {
@@ -72,7 +74,10 @@ const Exterior = () => {
     const querySnapshot = await getDocs(collection(db, 'config-models'));
     querySnapshot.forEach((doc: any) => {
       doc.data().model == modelShort
-        ? setModelConfig({ ...doc.data().accessories })
+        ? setModelConfig({
+            ...doc.data().accessories,
+            default: { ...doc.data().default },
+          })
         : '';
       setFetched(true);
     });
@@ -121,7 +126,7 @@ const Exterior = () => {
             }}
           >
             {colorsState
-              .filter((el) => el.name === selectedValues.accessories.color)
+              .filter((el) => el.name === `${selectedValues.accessories.color}`)
               .map((el) => {
                 return (
                   <article key={el.name} className='accessories'>
@@ -175,7 +180,6 @@ const Exterior = () => {
           ) : (
             ''
           )}
-
           <Link
             to={`/configure/interior/${year}/${model}`}
             className='btn-primary-lg'
