@@ -1,0 +1,156 @@
+@use '../../../scss/variables.scss' as v;
+
+.summary {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 48px 0;
+
+  &__title {
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+    margin-top: 12px;
+  }
+
+  &__total {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0 156px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid v.$border-5;
+    padding-bottom: 36px;
+
+    &__name {
+      h3 {
+        color: v.$text-1;
+        font-family: 'OpticianSans';
+        font-size: 48px;
+        font-weight: 400;
+      }
+
+      p {
+        color: v.$text-3;
+        font-size: 28px;
+        font-family: 'OpticianSans';
+      }
+    }
+
+    &__price {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      p {
+        font-size: 14px;
+        color: v.$text-4;
+      }
+
+      h3 {
+        font-weight: 400;
+        font-size: 24px;
+      }
+    }
+  }
+
+  &__details {
+    width: 1440px;
+    margin: 0 auto;
+    padding: 0 156px;
+    display: flex;
+    justify-content: space-between;
+
+    &__title {
+      font-size: 24px;
+      color: v.$text-1;
+      width: 40%;
+      padding-top: 60px;
+    }
+
+    &__right {
+      width: 60%;
+    }
+
+    &__nav {
+      padding-top: 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid v.$border-5;
+      padding-bottom: 20px;
+
+      p {
+        font-size: 24px;
+        color: v.$text-2;
+      }
+
+      a {
+        color: v.$primary;
+        font-size: 14px;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &__container {
+    width: 100%;
+    background-color: v.$background-2;
+  }
+
+  &__save {
+    width: 1440px;
+    padding: 0 40px;
+    margin: 0 auto;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+
+    &__name {
+      display: flex;
+      align-items: center;
+      flex: 2;
+
+      h3 {
+        color: v.$text-1;
+        font-family: 'OpticianSans';
+        font-size: 28px;
+        font-weight: 400;
+        margin-left: 12px;
+      }
+  
+      p {
+        color: v.$text-3;
+        font-size: 28px;
+        font-family: 'OpticianSans';
+      }
+    }
+    
+    &__price {
+      display: flex;
+      align-items: center;
+      margin-right: 32px;
+  
+      p {
+        font-size: 14px;
+        color: v.$text-4;
+      }
+  
+      h3 {
+        margin-left: 56px;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 32px;
+        color: v.$text-1;
+      }
+    }
+  }
+}
+
