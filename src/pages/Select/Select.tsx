@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Car } from '../../components';
-import { collection, query, getDocs, DocumentData } from 'firebase/firestore';
-import { ref, getDownloadURL } from 'firebase/storage';
+import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../modules/firebase';
 import { CarI } from '../../../modules/interfaces/index';
 import './select.scss';
@@ -12,6 +11,7 @@ const Select = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(models);
   }, []);
 
   const fetchData = async () => {
@@ -36,6 +36,7 @@ const Select = () => {
           >
             {models
               ? models.map((el: any) => {
+                  console.log(el);
                   return (
                     <motion.div key={el.id}>
                       <Car data={el} />
