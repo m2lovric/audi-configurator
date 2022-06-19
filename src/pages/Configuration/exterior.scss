@@ -4,7 +4,7 @@
   display: flex;
   height: calc(100vh - 160px) ;
   background-color: v.$text-1;
-
+  
   &__slider {
     width: 75%;
     background-color: v.$background;
@@ -43,11 +43,13 @@
 
 .splide__arrow {
   height: 100%;
+  font-size: 16px;
   width: 20%;
+  background-color: transparent;
 }
 
 .splide__pagination {
   width: 60%;
-  margin: 0 auto;
+  margin: 0 auto 14px auto;
 }
 
