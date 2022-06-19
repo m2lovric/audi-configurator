@@ -15,7 +15,11 @@ const Car = ({ data }: CarI) => {
         setSelectedValues({
           ...selectedValues,
           model: data.model.split(' ')[1],
-          accessories: { ...selectedValues.accessories, color: 'Black' },
+          accessories: {
+            ...selectedValues.accessories,
+            color: 'Black',
+            interior: 'Black&grey',
+          },
           price: 90000,
         });
 
@@ -25,7 +29,11 @@ const Car = ({ data }: CarI) => {
         setSelectedValues({
           ...selectedValues,
           model: data.model.split(' ')[1],
-          accessories: { ...selectedValues.accessories, color: 'Turbo Blue' },
+          accessories: {
+            ...selectedValues.accessories,
+            color: 'Turbo Blue',
+            interior: 'Black&gray',
+          },
         });
 
         break;
