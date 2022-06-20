@@ -37,7 +37,7 @@ function App() {
             Configure a car
           </Link>
         </header>
-        {savedConfigs ? (
+        {savedConfigs.length > 0 ? (
           savedConfigs.map((el) => {
             return (
               <section className='savedModel' key={el.id}>
