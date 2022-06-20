@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     console.log(user);
-    user ? '' : navigate('/register');
+    user ? '' : navigate('/login');
   }, []);
 
   return (

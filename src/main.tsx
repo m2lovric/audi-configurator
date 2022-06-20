@@ -11,8 +11,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
-        <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/select' element={<Select />} />
         <Route path='/configure/exterior/:year/:model' element={<Exterior />} />
         <Route path='/configure/interior/:year/:model' element={<Interior />} />

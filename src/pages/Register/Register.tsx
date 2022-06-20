@@ -74,8 +74,8 @@ const Register = () => {
           <button className='btn-primary-lg' onClick={() => handleSubmit()}>
             Create account
           </button>
-
-          <Link to={'/login'} className='btn-primary'>
+          <br />
+          <Link to={'/login'} className='btn-white'>
             Login
           </Link>
         </section>

@@ -5,7 +5,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../modules/firebase';
 import { userStateAtom } from '../../../modules/state/atoms';
 import { useRecoilState } from 'recoil';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
@@ -61,6 +61,10 @@ const Login = () => {
           <button className='btn-primary-lg' onClick={() => handleSubmit()}>
             Login
           </button>
+          <br />
+          <Link to={'/register'} className='btn-white'>
+            Create Account
+          </Link>
         </section>
       </section>
     </Layout>

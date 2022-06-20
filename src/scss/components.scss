@@ -28,6 +28,7 @@
   cursor: pointer;
   text-decoration: none;
   text-align: center;
+  border-radius: 3px;
 
   &-primary-lg {
     @extend .btn;
@@ -44,4 +45,18 @@
     max-width: max-content;
     
   }
+}
+
+.btn-white {
+  color: v.$text-1;
+  font-weight: 700;
+  background-color: v.$background-2;
+  border: 1px solid v.$border-5;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 3px;
+  width: 100%;
+  font-size: 16px;
+  padding: 20px 0;
 }
