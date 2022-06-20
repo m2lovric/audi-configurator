@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, ConfiguratorNav, Wheels, Colors } from '../../../components';
+import {
+  Layout,
+  ConfiguratorNav,
+  Wheels,
+  Colors,
+  InteriorColors,
+} from '../../../components';
 import { Link, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
@@ -159,6 +165,33 @@ const Summary = () => {
                 <p>Interior</p>
                 <Link to={`/configure/interior/${year}/${model}`}>Edit</Link>
               </nav>
+
+              <section>
+                {interiorState
+                  .filter(
+                    (el) => el.name === selectedValues.accessories.interior
+                  )
+                  .map((el) => {
+                    console.log(selectedValues.accessories.interior);
+                    return (
+                      <article key={el.name} className='accessories'>
+                        <img
+                          src={el.url}
+                          alt='car'
+                          className='accessories__img'
+                        />
+                        <section className='accessories__text'>
+                          <p className='accessories__name'>{el.name}</p>
+                          <p className='accessories__price'>PAINT COLOR</p>
+                        </section>
+                      </article>
+                    );
+                  })}
+
+                <div style={{ display: 'none' }}>
+                  <InteriorColors />
+                </div>
+              </section>
             </article>
           </section>
         </section>
