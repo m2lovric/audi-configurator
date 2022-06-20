@@ -20,7 +20,7 @@ const Interior = () => {
   const { year, model } = useParams();
   const modelShort = model?.split(' ')[1];
   const sides = ['Dash', 'Seats'];
-  const interiorState = useRecoilValue(interiorAtom);
+  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
 
@@ -35,6 +35,7 @@ const Interior = () => {
   useEffect(() => {
     setColorState([]);
     setWheelsState([]);
+    setInteriorState([]);
     setPhotos([]);
     sides.map((el) => {
       const starsRef = ref(

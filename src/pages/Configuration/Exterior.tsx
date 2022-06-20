@@ -47,6 +47,8 @@ const Exterior = () => {
   useEffect(() => {
     setModel();
     fetchData();
+    setColorState([]);
+    setWheelsState([]);
     setInteriorState([]);
     setPhotos([]);
 
