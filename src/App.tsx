@@ -13,7 +13,7 @@ function App() {
   useEffect(() => {
     console.log(user);
     user ? '' : navigate('/login');
-  }, []);
+  }, [user]);
 
   return (
     <Layout>

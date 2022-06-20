@@ -1,9 +1,15 @@
+import { User } from 'firebase/auth';
 import { atom } from 'recoil';
 import { modelConfigI, modelI } from '../interfaces/index';
 
 export const userStateAtom = atom({
   key: 'user',
   default: false,
+});
+
+export const userAtom = atom({
+  key: 'userAtom',
+  default: <User>{},
 });
 
 export const configModelsAtom = atom({
