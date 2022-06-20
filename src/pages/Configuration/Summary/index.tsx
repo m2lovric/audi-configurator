@@ -106,7 +106,15 @@ const Summary = () => {
             <article>
               <nav className='summary__details__nav'>
                 <p>Exterior</p>
-                <Link to={`/configure/exterior/${year}/${model}`}>Edit</Link>
+                <Link
+                  to={`/configure/exterior/${year}/${model}`}
+                  onClick={() => {
+                    setColorState([]);
+                    setWheelsState([]);
+                  }}
+                >
+                  Edit
+                </Link>
               </nav>
               <section>
                 {colorsState
@@ -163,7 +171,12 @@ const Summary = () => {
             <article>
               <nav className='summary__details__nav'>
                 <p>Interior</p>
-                <Link to={`/configure/interior/${year}/${model}`}>Edit</Link>
+                <Link
+                  to={`/configure/interior/${year}/${model}`}
+                  onClick={() => setInteriorState([])}
+                >
+                  Edit
+                </Link>
               </nav>
 
               <section>

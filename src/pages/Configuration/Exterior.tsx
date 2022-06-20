@@ -182,7 +182,7 @@ const Exterior = () => {
           )}
           <Link
             to={`/configure/interior/${year}/${model}`}
-            className='btn-primary-lg'
+            className='btn-primary-lg exterior__aside__link'
           >
             Interior
           </Link>

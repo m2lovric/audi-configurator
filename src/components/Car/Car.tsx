@@ -4,10 +4,18 @@ import './car.scss';
 import { motion } from 'framer-motion';
 import { CarI } from '../../../modules/interfaces';
 import { useRecoilState } from 'recoil';
-import { userConfiguration } from '../../../modules/state/atoms';
+import {
+  colorsAtom,
+  interiorAtom,
+  userConfiguration,
+  wheelsAtom,
+} from '../../../modules/state/atoms';
 
 const Car = ({ data }: CarI) => {
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [colorsState, setColorState] = useRecoilState(colorsAtom);
+  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
+  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
 
   const handleUpdate = () => {
     switch (data.model) {
@@ -22,7 +30,9 @@ const Car = ({ data }: CarI) => {
           },
           price: 90000,
         });
-
+        setColorState([]);
+        setWheelsState([]);
+        setInteriorState([]);
         break;
 
       case 'Audi RS5':
@@ -35,7 +45,9 @@ const Car = ({ data }: CarI) => {
             interior: 'Black&grey',
           },
         });
-
+        setColorState([]);
+        setWheelsState([]);
+        setInteriorState([]);
         break;
 
       case 'Audi e-tron GT':
@@ -49,6 +61,9 @@ const Car = ({ data }: CarI) => {
           },
           price: 100000,
         });
+        setColorState([]);
+        setWheelsState([]);
+        setInteriorState([]);
         break;
 
       default:
