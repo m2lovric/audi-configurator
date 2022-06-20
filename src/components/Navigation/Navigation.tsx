@@ -6,11 +6,16 @@ import { Link } from 'react-router-dom';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from '../../../modules/firebase';
 import { useRecoilState } from 'recoil';
-import { userAtom, userStateAtom } from '../../../modules/state/atoms';
+import {
+  userAtom,
+  userIdAtom,
+  userStateAtom,
+} from '../../../modules/state/atoms';
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();
   const [userState, setUserState] = useRecoilState(userStateAtom);
+  const [userId, setUserId] = useRecoilState(userIdAtom);
 
   const handleLogout = () => {
     signOut(auth).then(() => {
@@ -23,6 +28,7 @@ const Navigation = () => {
       if (user) {
         setUser(user);
         setUserState(true);
+        setUserId(user.uid);
       } else {
         setUser(undefined);
         setUserState(false);

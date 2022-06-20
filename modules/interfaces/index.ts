@@ -14,7 +14,26 @@ export interface modelI {
     interior: string;
     wheel: string;
   };
+  fullName?: string;
   price: number;
+  year: number;
+  sideUrl: string;
+  createdAt: string;
+}
+
+export interface modelIdI {
+  id: string;
+  model?: string;
+  accessories: {
+    color: string;
+    interior: string;
+    wheel: string;
+  };
+  fullName?: string;
+  price: number;
+  year: number;
+  sideUrl: string;
+  createdAt: string;
 }
 
 export interface modelConfigI {

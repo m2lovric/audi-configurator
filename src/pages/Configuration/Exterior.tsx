@@ -67,7 +67,11 @@ const Exterior = () => {
   }, [selectedValues.accessories]);
 
   const setModel = () => {
-    setSelectedValues({ ...selectedValues, model: modelShort });
+    setSelectedValues({
+      ...selectedValues,
+      model: modelShort,
+      fullName: model,
+    });
   };
 
   const fetchData = async () => {

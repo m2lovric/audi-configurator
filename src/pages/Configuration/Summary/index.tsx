@@ -6,7 +6,7 @@ import {
   Colors,
   InteriorColors,
 } from '../../../components';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
   colorsAtom,
@@ -16,9 +16,12 @@ import {
 } from '../../../../modules/state/atoms';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { storage } from '../../../../modules/firebase';
+import { storage, db, auth } from '../../../../modules/firebase';
 import { sides } from '../Exterior';
 import './summary.scss';
+import { doc, setDoc } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
+import { onAuthStateChanged, User } from 'firebase/auth';
 
 const Summary = () => {
   const { year, model } = useParams();
@@ -29,11 +32,22 @@ const Summary = () => {
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [photos, setPhotos] = useState<{ url: string; id: number }[]>([]);
+  const [user, setUser] = useState<string>('');
+  const navigate = useNavigate();
+  const [sidePhoto, setSidePhoto] = useState('');
 
   useEffect(() => {
     setColorState([]);
     setWheelsState([]);
     setInteriorState([]);
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user.uid);
+      } else {
+        setUser('');
+      }
+    });
 
     sides.map((el) => {
       const starsRef = ref(
@@ -44,12 +58,22 @@ const Summary = () => {
       getDownloadURL(starsRef)
         .then((url) => {
           setPhotos((oldArr) => [...oldArr, { url: url, id: el.id }]);
+          el.id === 3 ? setSidePhoto(url) : '';
         })
         .catch((error) => {
           console.log(error);
         });
     });
   }, [selectedValues.accessories]);
+
+  const handleSaveConfig = async () => {
+    await setDoc(doc(db, user, uuidv4()), {
+      ...selectedValues,
+      sideUrl: sidePhoto,
+      createdAt: new Date().toDateString(),
+    });
+    navigate('/');
+  };
 
   return (
     <Layout>
@@ -222,7 +246,9 @@ const Summary = () => {
             <h3>{selectedValues.price}.00 &euro;</h3>
           </article>
 
-          <button className='btn-primary'>Save your configuration</button>
+          <button className='btn-primary' onClick={() => handleSaveConfig()}>
+            Save your configuration
+          </button>
         </section>
       </section>
     </Layout>

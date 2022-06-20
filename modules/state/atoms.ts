@@ -12,6 +12,11 @@ export const userAtom = atom({
   default: <User>{},
 });
 
+export const userIdAtom = atom({
+  key: 'userIdAtom',
+  default: '',
+});
+
 export const configModelsAtom = atom({
   key: 'configModel',
   default: <modelConfigI>{},
@@ -56,6 +61,8 @@ export const userConfiguration = atom({
       interior: '',
       wheel: 'Style=One',
     },
+    fullName: '',
     price: 70000,
+    year: 2022,
   },
 });

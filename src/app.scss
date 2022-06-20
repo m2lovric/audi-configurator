@@ -13,6 +13,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
   }
 
   &__heading {
@@ -35,6 +36,58 @@
     span {
       color: v.$primary;
       font-weight: 700;
+    }
+  }
+}
+
+.savedModel {
+  width: 100%;
+  display: flex;
+  background-color: v.$background-2;
+  padding: 20px 40px;
+  margin-top: 28px;
+
+  img {
+    height: 135px;
+    width: auto;
+  }
+
+  &__right {
+    border-left: 1px solid v.$border-5;
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+
+    &__year {
+      font-size: 14px;
+      line-height: 16px;
+      color: v.$text-3;
+      font-weight: 300;
+      margin-bottom: 6px;
+    }
+
+    &__name {
+      font-size: 36px;
+      line-height: 32px;
+      color: v.$primary;
+      font-family: 'OpticianSans';
+      margin-bottom: 6px;
+    }
+
+    &__color {
+      font-size: 14px;
+      color: v.$text-2;
+      line-height: 16px;
+      font-weight: 300;
+    }
+
+    &__date {
+      font-size: 12px;
+      color: v.$text-4;
+      line-height: 16px;
+      font-weight: 300;
+      margin-top: auto;
+      margin-bottom: 4px;
     }
   }
 }
