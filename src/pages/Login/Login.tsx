@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from '../../components';
 import './login.scss';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../modules/firebase';
 import { userStateAtom } from '../../../modules/state/atoms';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
   const [userState, setUserState] = useRecoilState(userStateAtom);
   const navigate = useNavigate();
+  const user = useRecoilValue(userStateAtom);
+
+  useEffect(() => {
+    user ? navigate('/') : '';
+  }, [user]);
 
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
