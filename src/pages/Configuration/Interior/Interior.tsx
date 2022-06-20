@@ -35,7 +35,6 @@ const Interior = () => {
   useEffect(() => {
     setColorState([]);
     setWheelsState([]);
-    setInteriorState([]);
     setPhotos([]);
     sides.map((el) => {
       const starsRef = ref(
