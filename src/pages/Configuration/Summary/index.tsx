@@ -68,7 +68,11 @@ const Summary = () => {
   }, [selectedValues.accessories]);
 
   const handleSaveConfig = async () => {
-    await setDoc(doc(db, user, id ? id : uuidv4()), {
+    const uid = uuidv4();
+    const getId = id == undefined || id == 'undefined' ? uid : id;
+    console.log('getid:', getId);
+
+    await setDoc(doc(db, user, getId), {
       ...selectedValues,
       sideUrl: sidePhoto,
       createdAt: new Date().toDateString(),
