@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './car.scss';
-import { motion } from 'framer-motion';
 import { CarI } from '../../../modules/interfaces';
 import { useRecoilState } from 'recoil';
 import {

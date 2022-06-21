@@ -3,6 +3,8 @@ import { Layout, Car } from '../../components';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../modules/firebase';
 import { CarI } from '../../../modules/interfaces/index';
+import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 import './select.scss';
 import { motion } from 'framer-motion';
 
@@ -28,24 +30,31 @@ const Select = () => {
         <p className='select__sub'>
           Pick you favorite model and start configuring.
         </p>
-        <motion.div className='carousel select__carousel'>
-          <motion.div
-            drag='x'
-            dragConstraints={{ right: 0, left: -500 }}
-            className='inner-carousel select__cars '
-          >
+        <Splide
+          className='carousel select__carousel'
+          hasTrack={false}
+          tag='section'
+          options={{
+            type: 'slider',
+            perPage: 3,
+            gap: 400,
+          }}
+        >
+          <SplideTrack>
             {models
               ? models.map((el: any) => {
                   console.log(el);
                   return (
-                    <motion.div key={el.id}>
+                    <SplideSlide key={el.id}>
                       <Car data={el} />
-                    </motion.div>
+                    </SplideSlide>
                   );
                 })
               : ''}
-          </motion.div>
-        </motion.div>
+            <div className='splide__arrows'></div>
+            <div className='splide__pagination'></div>
+          </SplideTrack>
+        </Splide>
       </section>
     </Layout>
   );
