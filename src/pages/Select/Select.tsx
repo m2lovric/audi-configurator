@@ -6,7 +6,6 @@ import { CarI } from '../../../modules/interfaces/index';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './select.scss';
-import { motion } from 'framer-motion';
 
 const Select = () => {
   const [models, setModels] = useState<CarI[]>([]);
