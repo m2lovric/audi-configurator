@@ -36,8 +36,8 @@ const Select = () => {
           tag='section'
           options={{
             type: 'slider',
-            perPage: 3,
-            gap: 400,
+            perPage: 2,
+            gap: -80,
           }}
         >
           <SplideTrack>
