@@ -37,7 +37,7 @@ export interface modelIdI {
 }
 
 export interface modelConfigI {
-  default: {
+  default?: {
     color: string;
     interior: string;
     wheels: string;

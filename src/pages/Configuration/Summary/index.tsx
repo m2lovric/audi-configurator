@@ -24,7 +24,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { onAuthStateChanged, User } from 'firebase/auth';
 
 const Summary = () => {
-  const { year, model } = useParams();
+  const { year, model, id } = useParams();
   const modelShort = model?.split(' ')[1];
 
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
@@ -37,6 +37,7 @@ const Summary = () => {
   const [sidePhoto, setSidePhoto] = useState('');
 
   useEffect(() => {
+    console.log(selectedValues);
     setColorState([]);
     setWheelsState([]);
     setInteriorState([]);
@@ -67,7 +68,7 @@ const Summary = () => {
   }, [selectedValues.accessories]);
 
   const handleSaveConfig = async () => {
-    await setDoc(doc(db, user, uuidv4()), {
+    await setDoc(doc(db, user, id ? id : uuidv4()), {
       ...selectedValues,
       sideUrl: sidePhoto,
       createdAt: new Date().toDateString(),
@@ -131,7 +132,7 @@ const Summary = () => {
               <nav className='summary__details__nav'>
                 <p>Exterior</p>
                 <Link
-                  to={`/configure/exterior/${year}/${model}`}
+                  to={`/configure/exterior/${year}/${model}/${id}`}
                   onClick={() => {
                     setColorState([]);
                     setWheelsState([]);
@@ -196,7 +197,7 @@ const Summary = () => {
               <nav className='summary__details__nav'>
                 <p>Interior</p>
                 <Link
-                  to={`/configure/interior/${year}/${model}`}
+                  to={`/configure/interior/${year}/${model}/${id}`}
                   onClick={() => setInteriorState([])}
                 >
                   Edit

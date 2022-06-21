@@ -28,7 +28,7 @@ export const sides = [
 ];
 
 const Exterior = () => {
-  const { year, model } = useParams();
+  const { year, model, id } = useParams();
   let modelShort = model?.split(' ')[1];
 
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
@@ -185,7 +185,7 @@ const Exterior = () => {
             ''
           )}
           <Link
-            to={`/configure/interior/${year}/${model}`}
+            to={`/configure/interior/${year}/${model}/${id}`}
             className='btn-primary-lg exterior__aside__link'
           >
             Interior

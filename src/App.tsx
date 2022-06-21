@@ -1,19 +1,32 @@
 import { Layout } from './components';
 import './app.scss';
 import car from './assets/front-left-2.png';
-import { useRecoilValue } from 'recoil';
-import { userIdAtom, userStateAtom } from '../modules/state/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  configModelsAtom,
+  userConfiguration,
+  userIdAtom,
+  userStateAtom,
+} from '../modules/state/atoms';
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getDocs, collection, DocumentData } from 'firebase/firestore';
-import { auth, db } from '../modules/firebase/index';
-import { onAuthStateChanged } from 'firebase/auth';
+import {
+  getDocs,
+  collection,
+  DocumentData,
+  doc,
+  deleteDoc,
+} from 'firebase/firestore';
+import { db } from '../modules/firebase/index';
 import { modelI, modelIdI } from '../modules/interfaces';
+import dots from './assets/Union.svg';
 
 function App() {
   const user = useRecoilValue(userStateAtom);
   const userId = useRecoilValue(userIdAtom);
   const [savedConfigs, setSavedConfigs] = useState<modelIdI[]>([]);
+  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [modelConfig, setModelConfig] = useRecoilState(configModelsAtom);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,6 +39,34 @@ function App() {
     querySnapshot.docs.map((el: DocumentData) => {
       setSavedConfigs((oldArr) => [...oldArr, { id: el.id, ...el.data() }]);
     });
+  };
+
+  const handleEdit = async (
+    data: modelI,
+    year: number,
+    fullName?: string,
+    id?: string
+  ) => {
+    const querySnapshot = await getDocs(collection(db, 'config-models'));
+    querySnapshot.forEach((doc: any) => {
+      doc.data().model == data.model
+        ? setModelConfig({
+            ...doc.data().accessories,
+            default: {
+              color: data.accessories.color,
+              interior: data.accessories.interior,
+              wheels: data.accessories.wheel,
+            },
+          })
+        : '';
+    });
+    setSelectedValues({ ...data });
+    navigate(`/configure/summary/${year}/${fullName}/${id}`);
+  };
+
+  const handleDelete = async (id: string) => {
+    setSavedConfigs((oldArr) => oldArr.filter((el) => el.id !== id));
+    await deleteDoc(doc(db, userId, id));
   };
 
   return (
@@ -41,7 +82,11 @@ function App() {
           savedConfigs.map((el) => {
             return (
               <section className='savedModel' key={el.id}>
-                <img src={el.sideUrl} alt='car side photo' />
+                <img
+                  src={el.sideUrl}
+                  alt='car side photo'
+                  className='savedModel__car'
+                />
                 <article className='savedModel__right'>
                   <p className='savedModel__right__year'>{el.year}</p>
                   <h1 className='savedModel__right__name'>{el.fullName}</h1>
@@ -49,6 +94,27 @@ function App() {
                     {el.accessories.color.toUpperCase()}
                   </p>
                   <p className='savedModel__right__date'>{el.createdAt}</p>
+                </article>
+                <article className='savedModel__menu'>
+                  <img src={dots} alt='menu' />
+                  <section className='list'>
+                    <article className='list__section'>
+                      <p
+                        onClick={() =>
+                          handleEdit(el, el.year, el.fullName, el.id)
+                        }
+                        className='text'
+                      >
+                        Edit configuration
+                      </p>
+                    </article>
+                    <article
+                      className='list__section'
+                      onClick={() => handleDelete(el.id)}
+                    >
+                      <p className='delete'>Delete</p>
+                    </article>
+                  </section>
                 </article>
               </section>
             );

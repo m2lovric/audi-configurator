@@ -14,9 +14,27 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/select' element={<Select />} />
-        <Route path='/configure/exterior/:year/:model' element={<Exterior />} />
-        <Route path='/configure/interior/:year/:model' element={<Interior />} />
-        <Route path='/configure/summary/:year/:model' element={<Summary />} />
+        <Route
+          path='/configure/exterior/:year/:model/:id'
+          element={<Exterior />}
+        />
+        <Route
+          path='/configure/exterior/:year/:model/'
+          element={<Exterior />}
+        />
+        <Route
+          path='/configure/interior/:year/:model/:id'
+          element={<Interior />}
+        />
+        <Route
+          path='/configure/interior/:year/:model/'
+          element={<Interior />}
+        />
+        <Route
+          path='/configure/summary/:year/:model/:id'
+          element={<Summary />}
+        />
+        <Route path='/configure/summary/:year/:model/' element={<Summary />} />
       </Routes>
     </BrowserRouter>
   </RecoilRoot>

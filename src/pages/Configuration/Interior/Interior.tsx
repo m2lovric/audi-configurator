@@ -17,7 +17,7 @@ import {
 } from '../../../../modules/state/atoms';
 
 const Interior = () => {
-  const { year, model } = useParams();
+  const { year, model, id } = useParams();
   const modelShort = model?.split(' ')[1];
   const sides = ['Dash', 'Seats'];
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
@@ -117,7 +117,7 @@ const Interior = () => {
           )}
 
           <Link
-            to={`/configure/summary/${year}/${model}`}
+            to={`/configure/summary/${year}/${model}/${id}`}
             className='btn-primary-lg exterior__aside__link'
           >
             Summary
