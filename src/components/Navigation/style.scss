@@ -14,11 +14,13 @@
     position: relative;
 
     .list {
+      display: none;
+      position: absolute;
       top: 10px;
       left: 0;
       width: 212px;
       background-color: v.$background-2;
-      display: none;
+      
 
       &__section {
         height: 52px;

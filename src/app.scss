@@ -47,9 +47,70 @@
   padding: 20px 40px;
   margin-top: 28px;
 
-  img {
+  &__car {
     height: 135px;
     width: auto;
+  }
+
+  &__menu {
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      .list {
+        display: block;
+      }
+    }
+
+    img{
+      height: 16px;
+      width: 4px;
+    }
+
+    .list {
+      display: none;
+      top: 10px;
+      right: 0px;
+      width: 212px;
+      background-color: v.$background-2;
+      position: absolute;
+      box-shadow: 0px 10px 40px 0px #0000000F;
+
+      &__section {
+        height: 52px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        &:last-child {
+          border-top: 1px solid v.$border-5;
+        }
+      }
+
+      .text {
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        color: v.$primary;
+        margin-left: 16px;
+        text-decoration: none;
+      }
+
+      .delete {
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        color: v.$error;
+        margin-left: 16px;
+        text-decoration: none;
+      }
+    }
   }
 
   &__right {
