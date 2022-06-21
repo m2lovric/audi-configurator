@@ -83,10 +83,13 @@ const Colors = () => {
         : ''}
 
       <section className='colors__total'>
-        <p>TOTAL</p>
-        <p>1200000&euro;</p>
+        <p className='text'>TOTAL</p>
+        <p className='price'>100000 &euro;</p>
       </section>
-      <button className='btn-primary-lg'>Done</button>
+
+      <button className='btn-primary-lg' onClick={() => handleCancel()}>
+        Done
+      </button>
     </section>
   );
 };
