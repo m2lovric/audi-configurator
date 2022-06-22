@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../../components';
 import './login.scss';
-import { signInWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from 'firebase/auth';
 import { auth } from '../../../modules/firebase';
 import { userStateAtom } from '../../../modules/state/atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -19,11 +23,26 @@ const Login = () => {
     user ? navigate('/') : '';
   }, [user]);
 
+  const handleSignWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        setUserState(true);
+        navigate('/');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  };
+
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((res) => {
         setData({ email: '', password: '' });
-        console.log(res.user);
         setUserState(true);
         navigate('/');
       })
@@ -73,7 +92,10 @@ const Login = () => {
             <p>or</p>
             <article className='line'></article>
           </section>
-          <section className='login__google'>
+          <section
+            className='login__google'
+            onClick={() => handleSignWithGoogle()}
+          >
             <img src={googleImg} alt='google' />
           </section>
           <br />
