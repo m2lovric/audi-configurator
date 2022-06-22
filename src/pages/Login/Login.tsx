@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '../../components';
 import './login.scss';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../../../modules/firebase';
 import { userStateAtom } from '../../../modules/state/atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
+import googleImg from '../../assets/btn_google_signin_light_normal_web.png';
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
   const [userState, setUserState] = useRecoilState(userStateAtom);
-  const navigate = useNavigate();
   const user = useRecoilValue(userStateAtom);
+  const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
 
   useEffect(() => {
     user ? navigate('/') : '';
@@ -66,6 +68,14 @@ const Login = () => {
           <button className='btn-primary-lg' onClick={() => handleSubmit()}>
             Login
           </button>
+          <section className='login__or'>
+            <article className='line'></article>
+            <p>or</p>
+            <article className='line'></article>
+          </section>
+          <section className='login__google'>
+            <img src={googleImg} alt='google' />
+          </section>
           <br />
           <Link to={'/register'} className='btn-white'>
             Create Account
