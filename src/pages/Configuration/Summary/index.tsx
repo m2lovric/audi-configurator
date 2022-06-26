@@ -53,7 +53,7 @@ const Summary = () => {
     sides.map((el) => {
       const starsRef = ref(
         storage,
-        `${modelShort}/Car=${modelShort}, View=${el.view}, Color=${selectedValues.accessories.color}, Wheel ${selectedValues.accessories.wheel}.png`
+        `${modelShort}/Car=${modelShort}, View=${el.view}, Color=${selectedValues.accessories.color.name}, Wheel ${selectedValues.accessories.wheel.name}.png`
       );
 
       getDownloadURL(starsRef)
@@ -147,7 +147,9 @@ const Summary = () => {
               </nav>
               <section>
                 {colorsState
-                  .filter((el) => el.name === selectedValues.accessories.color)
+                  .filter(
+                    (el) => el.name === selectedValues.accessories.color.name
+                  )
                   .map((el) => {
                     return (
                       <article key={el.name} className='accessories'>
@@ -177,7 +179,7 @@ const Summary = () => {
                   .filter(
                     (el) =>
                       el.name ===
-                      `Car=${modelShort}, ${selectedValues.accessories.wheel}`
+                      `Car=${modelShort}, ${selectedValues.accessories.wheel.name}`
                   )
                   .map((el) => {
                     return (
@@ -219,10 +221,9 @@ const Summary = () => {
               <section>
                 {interiorState
                   .filter(
-                    (el) => el.name === selectedValues.accessories.interior
+                    (el) => el.name === selectedValues.accessories.interior.name
                   )
                   .map((el) => {
-                    console.log(selectedValues.accessories.interior);
                     return (
                       <article key={el.name} className='accessories'>
                         <img

@@ -39,7 +39,7 @@ const Interior = () => {
     sides.map((el) => {
       const starsRef = ref(
         storage,
-        `${modelShort}/Car=${modelShort}, Color=${selectedValues.accessories.interior}, View=${el}.png`
+        `${modelShort}/Car=${modelShort}, Color=${selectedValues.accessories.interior.name}, View=${el}.png`
       );
 
       getDownloadURL(starsRef)
@@ -93,9 +93,10 @@ const Interior = () => {
             }}
           >
             {interiorState
-              .filter((el) => el.name === selectedValues.accessories.interior)
+              .filter(
+                (el) => el.name === selectedValues.accessories.interior.name
+              )
               .map((el) => {
-                console.log(selectedValues.accessories.interior);
                 return (
                   <article key={el.name} className='accessories'>
                     <img src={el.url} alt='car' className='accessories__img' />
