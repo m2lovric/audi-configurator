@@ -30,16 +30,16 @@ const Colors = () => {
 
   useEffect(() => {
     modelConfig.interior.map((el) => {
-      const starsRef = ref(storage, `color-interior/Color=${el}.png`);
+      const starsRef = ref(storage, `color-interior/Color=${el.name}.png`);
 
       getDownloadURL(starsRef)
         .then((url) => {
           setInteriorColors((oldArr) => [
             ...oldArr,
             {
-              name: el,
+              name: el.name,
               url: url,
-              price: 2000,
+              price: el.price,
             },
           ]);
         })
@@ -68,7 +68,7 @@ const Colors = () => {
                     ...selectedValues,
                     accessories: {
                       ...selectedValues.accessories,
-                      interior: el.name,
+                      interior: { name: el.name, price: el.price },
                     },
                   })
                 }

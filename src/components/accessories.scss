@@ -12,6 +12,29 @@
     height: 60px;
   }
 
+  &__summary {
+
+    &__text {
+      margin-left: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__name {
+      font-size: 20px;
+      line-height: 28px;
+      color: v.$text-1;
+    }
+
+    &__price {
+      font-size: 20px;
+      line-height: 28px;
+      color: v.$text-3;
+    }
+  }
+
   &__text {
     margin-left: 20px;
     display: flex;

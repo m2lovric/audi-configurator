@@ -27,16 +27,16 @@ const Wheels = () => {
 
   useEffect(() => {
     modelConfig.wheels.map((el) => {
-      const starsRef = ref(storage, `wheels/${el}`);
+      const starsRef = ref(storage, `wheels/${el.name}`);
 
       getDownloadURL(starsRef)
         .then((url) => {
           setWheels((oldArr) => [
             ...oldArr,
             {
-              name: el.split('.')[0],
+              name: el.name.split('.')[0],
               url: url,
-              price: 3000,
+              price: el.price,
             },
           ]);
         })
@@ -66,7 +66,7 @@ const Wheels = () => {
                     ...selectedValues,
                     accessories: {
                       ...selectedValues.accessories,
-                      wheel: el.name.split(' ')[1],
+                      wheel: { name: el.name.split(' ')[1], price: el.price },
                     },
                   })
                 }

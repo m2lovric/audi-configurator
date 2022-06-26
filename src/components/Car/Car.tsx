@@ -24,10 +24,14 @@ const Car = ({ data }: CarI) => {
           model: data.model.split(' ')[1],
           accessories: {
             ...selectedValues.accessories,
-            color: 'Black',
-            interior: 'Black&grey',
+            color: { name: 'Black', price: 2500 },
+            interior: { name: 'Black&grey', price: 3500 },
           },
-          price: 90000,
+          price:
+            90000 +
+            selectedValues.accessories.color.price +
+            selectedValues.accessories.interior.price +
+            selectedValues.accessories.wheel.price,
         });
         setColorState([]);
         setWheelsState([]);
@@ -40,8 +44,8 @@ const Car = ({ data }: CarI) => {
           model: data.model.split(' ')[1],
           accessories: {
             ...selectedValues.accessories,
-            color: 'Turbo Blue',
-            interior: 'Black&grey',
+            color: { name: 'Turbo Blue', price: 2000 },
+            interior: { name: 'Black&grey', price: 3000 },
           },
         });
         setColorState([]);
@@ -55,8 +59,8 @@ const Car = ({ data }: CarI) => {
           model: data.model.split(' ')[1],
           accessories: {
             ...selectedValues.accessories,
-            color: 'Tactical Green',
-            interior: 'Black',
+            color: { name: 'Tactical Green', price: 2000 },
+            interior: { name: 'Black', price: 3000 },
           },
           price: 100000,
         });

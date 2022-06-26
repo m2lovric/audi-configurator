@@ -10,9 +10,9 @@ export interface CarI {
 export interface modelI {
   model?: string;
   accessories: {
-    color: string;
-    interior: string;
-    wheel: string;
+    color: { name: string; price: number };
+    interior: { name: string; price: number };
+    wheel: { name: string; price: number };
   };
   fullName?: string;
   price: number;
@@ -25,9 +25,9 @@ export interface modelIdI {
   id: string;
   model?: string;
   accessories: {
-    color: string;
-    interior: string;
-    wheel: string;
+    color: { name: string; price: number };
+    interior: { name: string; price: number };
+    wheel: { name: string; price: number };
   };
   fullName?: string;
   price: number;
@@ -42,7 +42,7 @@ export interface modelConfigI {
     interior: string;
     wheels: string;
   };
-  colors: string[];
-  wheels: string[];
-  interior: string[];
+  colors: { name: string; price: number }[];
+  wheels: { name: string; price: number }[];
+  interior: { name: string; price: number }[];
 }

@@ -29,16 +29,16 @@ const Colors = () => {
 
   useEffect(() => {
     modelConfig.colors.map((el) => {
-      const starsRef = ref(storage, `color-exterior/Color=${el}.png`);
+      const starsRef = ref(storage, `color-exterior/Color=${el.name}.png`);
 
       getDownloadURL(starsRef)
         .then((url) => {
           setColors((oldArr) => [
             ...oldArr,
             {
-              name: el,
+              name: el.name,
               url: url,
-              price: 2000,
+              price: el.price,
             },
           ]);
         })
@@ -67,7 +67,7 @@ const Colors = () => {
                     ...selectedValues,
                     accessories: {
                       ...selectedValues.accessories,
-                      color: el.name,
+                      color: { name: el.name, price: el.price },
                     },
                   })
                 }

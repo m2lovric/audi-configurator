@@ -156,9 +156,13 @@ const Summary = () => {
                           alt='car'
                           className='accessories__img'
                         />
-                        <section className='accessories__text'>
-                          <p className='accessories__name'>{el.name}</p>
-                          <p className='accessories__price'>PAINT COLOR</p>
+                        <section className='accessories__summary__text'>
+                          <p className='accessories__summary__name'>
+                            {el.name}
+                          </p>
+                          <p className='accessories__summary__price'>
+                            {el.price} &euro;
+                          </p>
                         </section>
                       </article>
                     );
@@ -183,9 +187,13 @@ const Summary = () => {
                           alt='car'
                           className='accessories__img'
                         />
-                        <section className='accessories__text'>
-                          <p className='accessories__name'>{el.name}</p>
-                          <p className='accessories__price'>WHEELS</p>
+                        <section className='accessories__summary__text'>
+                          <p className='accessories__summary__name'>
+                            {el.name}
+                          </p>
+                          <p className='accessories__summary__price'>
+                            {el.price} &euro;
+                          </p>
                         </section>
                       </article>
                     );
@@ -222,9 +230,13 @@ const Summary = () => {
                           alt='car'
                           className='accessories__img'
                         />
-                        <section className='accessories__text'>
-                          <p className='accessories__name'>{el.name}</p>
-                          <p className='accessories__price'>PAINT COLOR</p>
+                        <section className='accessories__summary__text'>
+                          <p className='accessories__summary__name'>
+                            {el.name}
+                          </p>
+                          <p className='accessories__summary__price'>
+                            {el.price} &euro;
+                          </p>
                         </section>
                       </article>
                     );
