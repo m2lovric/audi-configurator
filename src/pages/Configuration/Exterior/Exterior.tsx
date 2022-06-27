@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Layout, ConfiguratorNav, Colors, Wheels } from '../../components';
-import { db, storage } from '../../../modules/firebase';
+import { Layout, ConfiguratorNav, Colors, Wheels } from '../../../components';
+import { db, storage } from '../../../../modules/firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
@@ -17,8 +17,8 @@ import {
   userConfiguration,
   interiorAtom,
   totalPriceAtom,
-} from '../../../modules/state/atoms';
-import { modelConfigI } from '../../../modules/interfaces';
+} from '../../../../modules/state/atoms';
+import { modelConfigI } from '../../../../modules/interfaces';
 
 export const sides = [
   { id: 1, view: 'Front Left' },
