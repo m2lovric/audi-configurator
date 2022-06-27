@@ -4,7 +4,7 @@
   width: 1440px;
   margin: 0 auto;
   padding: 80px 156px;
-  height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
 
   &__title {
     font-weight: 300;
@@ -37,5 +37,11 @@
 
   .splide__pagination {
     display: none;
+  }
+}
+
+@media (max-width:481px) {
+  .select {
+    padding: 20px;
   }
 }

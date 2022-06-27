@@ -3,7 +3,7 @@
 .login {
   display: flex;
   justify-content: center;
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
 
   &__title {
       color: v.$text-4;
@@ -52,5 +52,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  @media (max-width:481px) {
+    padding: 20px;
+
+    &__form {
+      padding-top: 20px;
+    }
   }
 }
