@@ -4,7 +4,7 @@
   width: 1440px;
   margin: 0 auto;
   padding: 80px 156px;
-  max-height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
 
   &__title {
     font-weight: 300;
