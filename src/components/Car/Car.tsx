@@ -26,6 +26,7 @@ const Car = ({ data }: CarI) => {
             ...selectedValues.accessories,
             color: { name: 'Black', price: 2500 },
             interior: { name: 'Black&grey', price: 3500 },
+            wheel: { name: 'Style=One', price: 1000 },
           },
           price: 90000,
         });
@@ -42,6 +43,7 @@ const Car = ({ data }: CarI) => {
             ...selectedValues.accessories,
             color: { name: 'Turbo Blue', price: 2000 },
             interior: { name: 'Black&grey', price: 3000 },
+            wheel: { name: 'Style=One', price: 1000 },
           },
         });
         setColorState([]);
@@ -55,8 +57,9 @@ const Car = ({ data }: CarI) => {
           model: data.model.split(' ')[1],
           accessories: {
             ...selectedValues.accessories,
-            color: { name: 'Tactical Green', price: 2000 },
-            interior: { name: 'Black', price: 3000 },
+            color: { name: 'Tactical Green', price: 3000 },
+            interior: { name: 'Black', price: 4500 },
+            wheel: { name: 'Style=One', price: 3400 },
           },
           price: 100000,
         });

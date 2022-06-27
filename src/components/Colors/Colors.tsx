@@ -30,6 +30,7 @@ const Colors = () => {
   };
 
   const onColorChange = (el: { name: string; url: string; price: number }) => {
+    const currentColorPrice = selectedValues.accessories.color.price;
     setSelectedValues({
       ...selectedValues,
       accessories: {
@@ -37,7 +38,7 @@ const Colors = () => {
         color: { name: el.name, price: el.price },
       },
     });
-    const currentColorPrice = selectedValues.accessories.color.price;
+
     setTotalPrice(totalPrice - currentColorPrice + el.price);
   };
 

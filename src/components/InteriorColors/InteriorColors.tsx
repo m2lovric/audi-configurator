@@ -35,6 +35,7 @@ const Colors = () => {
     url: string;
     price: number;
   }) => {
+    const currentInteriorPrice = selectedValues.accessories.interior.price;
     setSelectedValues({
       ...selectedValues,
       accessories: {
@@ -42,7 +43,6 @@ const Colors = () => {
         interior: { name: el.name, price: el.price },
       },
     });
-    const currentInteriorPrice = selectedValues.accessories.interior.price;
     setTotalPrice(totalPrice - currentInteriorPrice + el.price);
   };
 

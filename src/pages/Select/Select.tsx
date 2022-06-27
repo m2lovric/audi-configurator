@@ -12,7 +12,6 @@ const Select = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(models);
   }, []);
 
   const fetchData = async () => {
@@ -42,7 +41,6 @@ const Select = () => {
           <SplideTrack>
             {models
               ? models.map((el: any) => {
-                  console.log(el);
                   return (
                     <SplideSlide key={el.id}>
                       <Car data={el} />

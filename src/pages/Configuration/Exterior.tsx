@@ -51,12 +51,7 @@ const Exterior = () => {
     fetchData();
     setInteriorState([]);
     setPhotos([]);
-    setTotalPrice(
-      selectedValues.price +
-        selectedValues.accessories.color.price +
-        selectedValues.accessories.interior.price +
-        selectedValues.accessories.wheel.price
-    );
+
     sides.map((el) => {
       const starsRef = ref(
         storage,
@@ -71,6 +66,13 @@ const Exterior = () => {
           console.log(error);
         });
     });
+
+    setTotalPrice(
+      selectedValues.price +
+        selectedValues.accessories.color.price +
+        selectedValues.accessories.interior.price +
+        selectedValues.accessories.wheel.price
+    );
   }, [selectedValues.accessories]);
 
   const setModel = () => {

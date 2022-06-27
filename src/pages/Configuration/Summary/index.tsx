@@ -39,7 +39,6 @@ const Summary = () => {
   const [sidePhoto, setSidePhoto] = useState('');
 
   useEffect(() => {
-    console.log(selectedValues);
     setColorState([]);
     setWheelsState([]);
     setInteriorState([]);
@@ -72,7 +71,6 @@ const Summary = () => {
   const handleSaveConfig = async () => {
     const uid = uuidv4();
     const getId = id == undefined || id == 'undefined' ? uid : id;
-    console.log('getid:', getId);
 
     await setDoc(doc(db, user, getId), {
       ...selectedValues,

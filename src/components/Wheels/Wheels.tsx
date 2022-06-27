@@ -28,6 +28,7 @@ const Wheels = () => {
   };
 
   const onWheelChange = (el: { name: string; url: string; price: number }) => {
+    const currentWheelPrice = selectedValues.accessories.wheel.price;
     setSelectedValues({
       ...selectedValues,
       accessories: {
@@ -35,7 +36,6 @@ const Wheels = () => {
         wheel: { name: el.name.split(' ')[1], price: el.price },
       },
     });
-    const currentWheelPrice = selectedValues.accessories.wheel.price;
     setTotalPrice(totalPrice - currentWheelPrice + el.price);
   };
 

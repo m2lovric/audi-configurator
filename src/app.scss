@@ -2,7 +2,7 @@
 
 .home {
   max-width: 1440px;
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   margin: 0 auto;
   padding: 82px 156px;
   display: flex;
