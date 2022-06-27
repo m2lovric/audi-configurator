@@ -36,6 +36,9 @@ const Select = () => {
             type: 'slider',
             perPage: 2,
             gap: -80,
+            breakpoints: {
+              480: { perPage: 1, gap: 0 },
+            },
           }}
         >
           <SplideTrack>
