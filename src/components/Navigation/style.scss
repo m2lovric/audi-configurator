@@ -64,3 +64,9 @@
   width: 1440px;
   padding: 0 40px;
 }
+
+@media (max-width:481px) {
+  .container {
+    padding: 0;
+  }
+}

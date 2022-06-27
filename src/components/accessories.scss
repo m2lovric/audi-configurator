@@ -106,3 +106,14 @@
     }
   }
 }
+
+@media (max-width:481px) {
+  .colors {
+    position: absolute;
+    margin-top: 0;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+}
