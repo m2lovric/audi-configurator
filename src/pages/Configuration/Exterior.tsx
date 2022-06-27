@@ -16,6 +16,7 @@ import {
   visibleAtomA,
   userConfiguration,
   interiorAtom,
+  totalPriceAtom,
 } from '../../../modules/state/atoms';
 import { modelConfigI } from '../../../modules/interfaces';
 
@@ -31,6 +32,7 @@ const Exterior = () => {
   const { year, model, id } = useParams();
   let modelShort = model?.split(' ')[1];
 
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
@@ -49,7 +51,12 @@ const Exterior = () => {
     fetchData();
     setInteriorState([]);
     setPhotos([]);
-
+    setTotalPrice(
+      selectedValues.price +
+        selectedValues.accessories.color.price +
+        selectedValues.accessories.interior.price +
+        selectedValues.accessories.wheel.price
+    );
     sides.map((el) => {
       const starsRef = ref(
         storage,
@@ -186,6 +193,10 @@ const Exterior = () => {
           ) : (
             ''
           )}
+          <section className='exterior__total'>
+            <p className='text'>TOTAL</p>
+            <p className='price'>{totalPrice} &euro;</p>
+          </section>
           <Link
             to={`/configure/interior/${year}/${model}/${id}`}
             className='btn-primary-lg exterior__aside__link'

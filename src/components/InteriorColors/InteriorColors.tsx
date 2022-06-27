@@ -8,12 +8,14 @@ import {
   interiorAtom,
   visibleInteriorAtom,
   userConfiguration,
+  totalPriceAtom,
 } from '../../../modules/state/atoms';
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
 
 const Colors = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
 
   const [interiorColors, setInteriorColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(
@@ -26,6 +28,22 @@ const Colors = () => {
 
   const handleCancel = () => {
     setVisibleInterior(false);
+  };
+
+  const onInteriorChange = (el: {
+    name: string;
+    url: string;
+    price: number;
+  }) => {
+    setSelectedValues({
+      ...selectedValues,
+      accessories: {
+        ...selectedValues.accessories,
+        interior: { name: el.name, price: el.price },
+      },
+    });
+    const currentInteriorPrice = selectedValues.accessories.interior.price;
+    setTotalPrice(totalPrice - currentInteriorPrice + el.price);
   };
 
   useEffect(() => {
@@ -63,15 +81,7 @@ const Colors = () => {
               <article
                 key={el.name}
                 className='accessories'
-                onClick={() =>
-                  setSelectedValues({
-                    ...selectedValues,
-                    accessories: {
-                      ...selectedValues.accessories,
-                      interior: { name: el.name, price: el.price },
-                    },
-                  })
-                }
+                onClick={() => onInteriorChange(el)}
               >
                 <img src={el.url} alt='' />
                 <section className='accessories__text'>
@@ -84,7 +94,7 @@ const Colors = () => {
         : ''}
       <section className='colors__total'>
         <p className='text'>TOTAL</p>
-        <p className='price'>1200000&euro;</p>
+        <p className='price'>{totalPrice}&euro;</p>
       </section>
       <button className='btn-primary-lg' onClick={() => handleCancel()}>
         Done

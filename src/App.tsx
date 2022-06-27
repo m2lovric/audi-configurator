@@ -53,9 +53,9 @@ function App() {
         ? setModelConfig({
             ...doc.data().accessories,
             default: {
-              color: data.accessories.color,
-              interior: data.accessories.interior,
-              wheels: data.accessories.wheel,
+              color: data.accessories.color.name,
+              interior: data.accessories.interior.name,
+              wheels: data.accessories.wheel.name,
             },
           })
         : '';
@@ -91,7 +91,7 @@ function App() {
                   <p className='savedModel__right__year'>{el.year}</p>
                   <h1 className='savedModel__right__name'>{el.fullName}</h1>
                   <p className='savedModel__right__color'>
-                    {el.accessories.color.toUpperCase()}
+                    {el.accessories.color.name.toUpperCase()}
                   </p>
                   <p className='savedModel__right__date'>{el.createdAt}</p>
                 </article>

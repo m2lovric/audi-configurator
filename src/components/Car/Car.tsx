@@ -27,11 +27,7 @@ const Car = ({ data }: CarI) => {
             color: { name: 'Black', price: 2500 },
             interior: { name: 'Black&grey', price: 3500 },
           },
-          price:
-            90000 +
-            selectedValues.accessories.color.price +
-            selectedValues.accessories.interior.price +
-            selectedValues.accessories.wheel.price,
+          price: 90000,
         });
         setColorState([]);
         setWheelsState([]);

@@ -8,12 +8,14 @@ import {
   visibleAtom,
   visibleAtomA,
   userConfiguration,
+  totalPriceAtom,
 } from '../../../modules/state/atoms';
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
 
 const Colors = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
 
   const [visible, setVisible] = useRecoilState(visibleAtom);
   const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
@@ -25,6 +27,18 @@ const Colors = () => {
   const handleCancel = () => {
     setVisible({ ...visible, colors: false });
     setVisibleA({ ...visibleA, colors: false });
+  };
+
+  const onColorChange = (el: { name: string; url: string; price: number }) => {
+    setSelectedValues({
+      ...selectedValues,
+      accessories: {
+        ...selectedValues.accessories,
+        color: { name: el.name, price: el.price },
+      },
+    });
+    const currentColorPrice = selectedValues.accessories.color.price;
+    setTotalPrice(totalPrice - currentColorPrice + el.price);
   };
 
   useEffect(() => {
@@ -62,15 +76,7 @@ const Colors = () => {
               <article
                 key={el.name}
                 className='accessories'
-                onClick={() =>
-                  setSelectedValues({
-                    ...selectedValues,
-                    accessories: {
-                      ...selectedValues.accessories,
-                      color: { name: el.name, price: el.price },
-                    },
-                  })
-                }
+                onClick={() => onColorChange(el)}
               >
                 <img src={el.url} alt='' />
                 <section className='accessories__text'>
@@ -84,7 +90,7 @@ const Colors = () => {
 
       <section className='colors__total'>
         <p className='text'>TOTAL</p>
-        <p className='price'>100000 &euro;</p>
+        <p className='price'>{totalPrice} &euro;</p>
       </section>
 
       <button className='btn-primary-lg' onClick={() => handleCancel()}>

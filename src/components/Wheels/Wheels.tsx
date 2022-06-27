@@ -9,10 +9,12 @@ import {
   visibleAtom,
   visibleAtomA,
   userConfiguration,
+  totalPriceAtom,
 } from '../../../modules/state/atoms';
 
 const Wheels = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [wheels, setWheels] =
     useRecoilState<{ name: string; url: string; price: number }[]>(wheelsAtom);
@@ -23,6 +25,18 @@ const Wheels = () => {
   const handleCancel = () => {
     setVisible({ ...visible, wheels: false });
     setVisibleA({ ...visibleA, wheels: false });
+  };
+
+  const onWheelChange = (el: { name: string; url: string; price: number }) => {
+    setSelectedValues({
+      ...selectedValues,
+      accessories: {
+        ...selectedValues.accessories,
+        wheel: { name: el.name.split(' ')[1], price: el.price },
+      },
+    });
+    const currentWheelPrice = selectedValues.accessories.wheel.price;
+    setTotalPrice(totalPrice - currentWheelPrice + el.price);
   };
 
   useEffect(() => {
@@ -61,15 +75,7 @@ const Wheels = () => {
               <article
                 key={el.name}
                 className='accessories'
-                onClick={() =>
-                  setSelectedValues({
-                    ...selectedValues,
-                    accessories: {
-                      ...selectedValues.accessories,
-                      wheel: { name: el.name.split(' ')[1], price: el.price },
-                    },
-                  })
-                }
+                onClick={() => onWheelChange(el)}
               >
                 <img src={el.url} alt='' />
                 <section className='accessories__text'>
@@ -83,7 +89,7 @@ const Wheels = () => {
 
       <section className='colors__total'>
         <p>TOTAL</p>
-        <p>1200000&euro;</p>
+        <p>{totalPrice}&euro;</p>
       </section>
       <button className='btn-primary-lg'>Done</button>
     </section>

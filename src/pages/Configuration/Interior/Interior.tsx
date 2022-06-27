@@ -11,6 +11,7 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   colorsAtom,
   interiorAtom,
+  totalPriceAtom,
   userConfiguration,
   visibleInteriorAtom,
   wheelsAtom,
@@ -20,6 +21,8 @@ const Interior = () => {
   const { year, model, id } = useParams();
   const modelShort = model?.split(' ')[1];
   const sides = ['Dash', 'Seats'];
+
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
@@ -117,6 +120,10 @@ const Interior = () => {
             ''
           )}
 
+          <section className='exterior__total'>
+            <p className='text'>TOTAL</p>
+            <p className='price'>{totalPrice} &euro;</p>
+          </section>
           <Link
             to={`/configure/summary/${year}/${model}/${id}`}
             className='btn-primary-lg exterior__aside__link'

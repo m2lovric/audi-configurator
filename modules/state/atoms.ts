@@ -66,3 +66,8 @@ export const userConfiguration = atom({
     year: 2022,
   },
 });
+
+export const totalPriceAtom = atom({
+  key: 'totalPrice',
+  default: 0,
+});

@@ -11,6 +11,7 @@ import { useRecoilState } from 'recoil';
 import {
   colorsAtom,
   interiorAtom,
+  totalPriceAtom,
   userConfiguration,
   wheelsAtom,
 } from '../../../../modules/state/atoms';
@@ -27,6 +28,7 @@ const Summary = () => {
   const { year, model, id } = useParams();
   const modelShort = model?.split(' ')[1];
 
+  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
@@ -125,7 +127,7 @@ const Summary = () => {
 
           <article className='summary__total__price'>
             <p>TOTAL</p>
-            <h3>{selectedValues.price}.00 &euro;</h3>
+            <h3>{totalPrice}.00 &euro;</h3>
           </article>
         </section>
 
@@ -261,7 +263,7 @@ const Summary = () => {
 
           <article className='summary__save__price'>
             <p>TOTAL</p>
-            <h3>{selectedValues.price}.00 &euro;</h3>
+            <h3>{totalPrice}.00 &euro;</h3>
           </article>
 
           <button className='btn-primary' onClick={() => handleSaveConfig()}>
