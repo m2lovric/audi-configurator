@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Layout, Car } from '../../components';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  QueryDocumentSnapshot,
+} from 'firebase/firestore';
 import { db } from '../../../modules/firebase';
-import { CarI } from '../../../modules/interfaces/index';
+import { CarI, modelI } from '../../../modules/interfaces/index';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './select.scss';
+import { useRecoilState } from 'recoil';
+import { selectModelAtom } from '../../../modules/state/atoms';
 
 const Select = () => {
   const [models, setModels] = useState<CarI[]>([]);
+  const [selectModels, setSelectModels] =
+    useRecoilState<modelI[]>(selectModelAtom);
 
   useEffect(() => {
     fetchData();
@@ -18,6 +27,17 @@ const Select = () => {
     const querySnapshot = await getDocs(collection(db, 'models'));
     querySnapshot.forEach((doc: any) => {
       setModels((oldArr) => [...oldArr, { ...doc.data(), id: doc.id }]);
+    });
+
+    const querySnapshotConfigModels = await getDocs(
+      collection(db, 'config-models')
+    );
+    querySnapshotConfigModels.forEach((doc: any) => {
+      setSelectModels((oldArr: any) => [
+        ...oldArr,
+        { ...doc.data(), id: doc.id },
+      ]);
+      console.log(selectModels);
     });
   };
 

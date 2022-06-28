@@ -17,6 +17,10 @@ export const userIdAtom = atom({
   default: '',
 });
 
+export const selectModelAtom = atom({
+  key: 'selectModel',
+  default: <any>[],
+});
 export const configModelsAtom = atom({
   key: 'configModel',
   default: <modelConfigI>{},
