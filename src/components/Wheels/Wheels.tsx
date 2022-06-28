@@ -91,7 +91,9 @@ const Wheels = () => {
         <p>TOTAL</p>
         <p>{totalPrice}&euro;</p>
       </section>
-      <button className='btn-primary-lg'>Done</button>
+      <button className='btn-primary-lg' onClick={() => handleCancel()}>
+        Done
+      </button>
     </section>
   );
 };
