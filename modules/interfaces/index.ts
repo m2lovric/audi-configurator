@@ -14,11 +14,13 @@ export interface modelI {
     interior: { name: string; price: number };
     wheel: { name: string; price: number };
   };
+
   default: {
     color: { name: string; price: number };
     interior: { name: string; price: number };
     wheels: { name: string; price: number };
   };
+
   fullName?: string;
   price: number;
   year?: number;
@@ -33,6 +35,11 @@ export interface modelIdI {
     color: { name: string; price: number };
     interior: { name: string; price: number };
     wheel: { name: string; price: number };
+  };
+  default: {
+    color: { name: string; price: number };
+    interior: { name: string; price: number };
+    wheels: { name: string; price: number };
   };
   fullName?: string;
   price: number;
