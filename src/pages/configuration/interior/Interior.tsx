@@ -5,7 +5,7 @@ import { storage } from 'modules/firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import '../Exterior/exterior.scss';
+import '../exterior/exterior.scss';
 import { useRecoilState } from 'recoil';
 import {
   colorsAtom,
