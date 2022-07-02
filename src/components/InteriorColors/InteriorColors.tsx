@@ -1,7 +1,7 @@
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { storage } from '../../../modules/firebase';
+import { storage } from 'modules/firebase';
 import {
   configModelsAtom,
   colorsAtom,

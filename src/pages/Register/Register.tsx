@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Layout } from '../../components';
+import { Layout } from '@/components';
 import './style.scss';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../../modules/firebase';
+import { auth } from 'modules/firebase';
 import { useRecoilState } from 'recoil';
-import { userStateAtom } from '../../../modules/state/atoms';
+import { userStateAtom } from 'modules/state/atoms';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {

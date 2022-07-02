@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './car.scss';
-import { CarI, modelI } from '../../../modules/interfaces';
+import { CarI, modelI } from 'modules/interfaces';
 import { useRecoilState } from 'recoil';
 import {
   colorsAtom,
@@ -9,7 +9,7 @@ import {
   selectModelAtom,
   userConfiguration,
   wheelsAtom,
-} from '../../../modules/state/atoms';
+} from 'modules/state/atoms';
 
 const Car = ({ data }: CarI) => {
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);

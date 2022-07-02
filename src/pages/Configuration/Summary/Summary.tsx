@@ -5,7 +5,7 @@ import {
   Wheels,
   Colors,
   InteriorColors,
-} from '../../../components';
+} from '@/components';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import {
@@ -14,10 +14,10 @@ import {
   totalPriceAtom,
   userConfiguration,
   wheelsAtom,
-} from '../../../../modules/state/atoms';
+} from 'modules/state/atoms';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { storage, db, auth } from '../../../../modules/firebase';
+import { storage, db, auth } from 'modules/firebase';
 import { sides } from '../exterior/Exterior';
 import './summary.scss';
 import { doc, setDoc } from 'firebase/firestore';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Layout, ConfiguratorNav, InteriorColors } from '../../../components';
-import { storage } from '../../../../modules/firebase';
+import { Layout, ConfiguratorNav, InteriorColors } from '@/components';
+import { storage } from 'modules/firebase';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
@@ -14,7 +14,7 @@ import {
   userConfiguration,
   visibleInteriorAtom,
   wheelsAtom,
-} from '../../../../modules/state/atoms';
+} from 'modules/state/atoms';
 
 const Interior = () => {
   const { year, model, id } = useParams();

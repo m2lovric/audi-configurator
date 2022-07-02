@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Layout, Car } from '../../components';
+import { Layout, Car } from '@/components';
 import {
   collection,
   DocumentData,
   getDocs,
   QueryDocumentSnapshot,
 } from 'firebase/firestore';
-import { db } from '../../../modules/firebase';
-import { CarI, modelI } from '../../../modules/interfaces/index';
+import { db } from 'modules/firebase';
+import { CarI, modelI } from 'modules/interfaces/index';
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './select.scss';
 import { useRecoilState } from 'recoil';
-import { selectModelAtom } from '../../../modules/state/atoms';
+import { selectModelAtom } from 'modules/state/atoms';
 
 const Select = () => {
   const [models, setModels] = useState<CarI[]>([]);

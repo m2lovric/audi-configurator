@@ -7,7 +7,7 @@ import {
   userConfiguration,
   userIdAtom,
   userStateAtom,
-} from '../modules/state/atoms';
+} from 'modules/state/atoms';
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
@@ -17,8 +17,8 @@ import {
   doc,
   deleteDoc,
 } from 'firebase/firestore';
-import { db } from '../modules/firebase/index';
-import { modelI, modelIdI } from '../modules/interfaces';
+import { db } from 'modules/firebase/index';
+import { modelI, modelIdI } from 'modules/interfaces';
 import dots from './assets/Union.svg';
 
 function App() {

@@ -1,8 +1,8 @@
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { storage } from '../../../modules/firebase';
-import cancel from '../../assets/X.png';
+import { storage } from 'modules/firebase';
+import cancel from '@/assets/X.png';
 import {
   configModelsAtom,
   wheelsAtom,

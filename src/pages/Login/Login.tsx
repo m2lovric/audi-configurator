@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Layout } from '../../components';
+import { Layout } from '@/components';
 import './login.scss';
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
 } from 'firebase/auth';
-import { auth } from '../../../modules/firebase';
-import { userStateAtom } from '../../../modules/state/atoms';
+import { auth } from 'modules/firebase';
+import { userStateAtom } from 'modules/state/atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
-import googleImg from '../../assets/btn_google_signin_light_normal_web.png';
+import googleImg from '@/assets/btn_google_signin_light_normal_web.png';
 
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
