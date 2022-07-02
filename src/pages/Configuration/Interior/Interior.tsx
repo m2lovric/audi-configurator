@@ -63,15 +63,14 @@ const Interior = () => {
           <Splide hasTrack={false}>
             <section className='exterior__slider__container'>
               <SplideTrack>
-                {photos
-                  ? photos.map((el, i) => {
-                      return (
-                        <SplideSlide key={i}>
-                          <img src={el} alt='car' />
-                        </SplideSlide>
-                      );
-                    })
-                  : ''}
+                {photos &&
+                  photos.map((el, i) => {
+                    return (
+                      <SplideSlide key={i}>
+                        <img src={el} alt='car' />
+                      </SplideSlide>
+                    );
+                  })}
               </SplideTrack>
             </section>
             <div className='splide__arrows'>
@@ -111,12 +110,10 @@ const Interior = () => {
               })}
           </section>
 
-          {fetched ? (
+          {fetched && (
             <div style={{ display: visibleInterior ? 'block' : 'none' }}>
               <InteriorColors />
             </div>
-          ) : (
-            ''
           )}
 
           <section className='exterior__total'>

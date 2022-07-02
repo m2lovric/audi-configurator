@@ -30,7 +30,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    user ? '' : navigate('/login');
+    !user && navigate('/login');
     getData();
   }, [user]);
 

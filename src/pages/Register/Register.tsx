@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout } from '@/components';
 import './style.scss';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from 'modules/firebase';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { userStateAtom } from 'modules/state/atoms';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,11 @@ const Register = () => {
   const [data, setData] = useState({ name: '', email: '', password: '' });
   const [userState, setUserState] = useRecoilState(userStateAtom);
   const navigate = useNavigate();
+  const user = useRecoilValue(userStateAtom);
+
+  useEffect(() => {
+    user && navigate('/');
+  }, [user]);
 
   const handleSubmit = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)

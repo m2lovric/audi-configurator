@@ -20,7 +20,7 @@ const Login = () => {
   const provider = new GoogleAuthProvider();
 
   useEffect(() => {
-    user ? navigate('/') : '';
+    user && navigate('/');
   }, [user]);
 
   const handleSignWithGoogle = () => {

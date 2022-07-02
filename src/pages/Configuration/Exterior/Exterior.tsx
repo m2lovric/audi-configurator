@@ -86,12 +86,11 @@ const Exterior = () => {
   const fetchData = async () => {
     const querySnapshot = await getDocs(collection(db, 'config-models'));
     querySnapshot.forEach((doc: any) => {
-      doc.data().model == modelShort
-        ? setModelConfig({
-            ...doc.data().accessories,
-            default: { ...doc.data().default },
-          })
-        : '';
+      doc.data().model == modelShort &&
+        setModelConfig({
+          ...doc.data().accessories,
+          default: { ...doc.data().default },
+        });
       setFetched(true);
     });
   };
@@ -104,17 +103,16 @@ const Exterior = () => {
           <Splide hasTrack={false}>
             <section className='exterior__slider__container'>
               <SplideTrack>
-                {photos
-                  ? photos
-                      .sort((a, b) => a.id - b.id)
-                      .map((el) => {
-                        return (
-                          <SplideSlide key={el.id}>
-                            <img src={el.url} alt='car' />
-                          </SplideSlide>
-                        );
-                      })
-                  : ''}
+                {photos &&
+                  photos
+                    .sort((a, b) => a.id - b.id)
+                    .map((el) => {
+                      return (
+                        <SplideSlide key={el.id}>
+                          <img src={el.url} alt='car' />
+                        </SplideSlide>
+                      );
+                    })}
               </SplideTrack>
             </section>
             <div className='splide__arrows'>
@@ -181,19 +179,15 @@ const Exterior = () => {
                 );
               })}
           </section>
-          {fetched ? (
+          {fetched && (
             <div style={{ display: visible.colors ? 'block' : 'none' }}>
               <Colors />
             </div>
-          ) : (
-            ''
           )}
-          {fetched ? (
+          {fetched && (
             <div style={{ display: visible.wheels ? 'block' : 'none' }}>
               <Wheels />
             </div>
-          ) : (
-            ''
           )}
           <section className='exterior__total'>
             <p className='text'>TOTAL</p>

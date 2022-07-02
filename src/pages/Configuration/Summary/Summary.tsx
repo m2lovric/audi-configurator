@@ -60,7 +60,7 @@ const Summary = () => {
       getDownloadURL(starsRef)
         .then((url) => {
           setPhotos((oldArr) => [...oldArr, { url: url, id: el.id }]);
-          el.id === 3 ? setSidePhoto(url) : '';
+          el.id === 3 && setSidePhoto(url);
         })
         .catch((error) => {
           console.log(error);
@@ -92,17 +92,16 @@ const Summary = () => {
           <Splide hasTrack={false}>
             <section className='exterior__slider__container'>
               <SplideTrack>
-                {photos
-                  ? photos
-                      .sort((a, b) => a.id - b.id)
-                      .map((el) => {
-                        return (
-                          <SplideSlide key={el.id}>
-                            <img src={el.url} alt='car' />
-                          </SplideSlide>
-                        );
-                      })
-                  : ''}
+                {photos &&
+                  photos
+                    .sort((a, b) => a.id - b.id)
+                    .map((el) => {
+                      return (
+                        <SplideSlide key={el.id}>
+                          <img src={el.url} alt='car' />
+                        </SplideSlide>
+                      );
+                    })}
               </SplideTrack>
             </section>
             <div className='splide__arrows'>
