@@ -1,8 +1,8 @@
 import Layout from './Layout';
-import Car from './Car/Car';
-import ConfiguratorNav from './ConfiguratorNav/ConfiguratorNav';
-import Colors from './Colors/Colors';
-import Wheels from './Wheels/Wheels';
-import InteriorColors from './InteriorColors/InteriorColors';
+import Car from './car/Car';
+import ConfiguratorNav from './configuratorNav/ConfiguratorNav';
+import Colors from './colors/Colors';
+import Wheels from './wheels/Wheels';
+import InteriorColors from './interiorColors/InteriorColors';
 
 export { Layout, Car, ConfiguratorNav, Colors, Wheels, InteriorColors };

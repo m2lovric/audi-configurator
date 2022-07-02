@@ -18,7 +18,7 @@ import {
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { storage, db, auth } from '../../../../modules/firebase';
-import { sides } from '../Exterior/Exterior';
+import { sides } from '../exterior/Exterior';
 import './summary.scss';
 import { doc, setDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';

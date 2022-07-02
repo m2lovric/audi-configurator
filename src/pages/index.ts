@@ -1,7 +1,7 @@
-import Login from './Login/Login';
-import Register from './Register/Register';
-import Select from './Select/Select';
-import Exterior from './Configuration/Exterior/Exterior';
-import Interior from './Configuration/Interior/Interior';
-import Summary from './Configuration/Summary/Summary';
+import Login from './login/Login';
+import Register from './register/Register';
+import Select from './select/Select';
+import Exterior from './configuration/exterior/Exterior';
+import Interior from './configuration/interior/Interior';
+import Summary from './configuration/summary/Summary';
 export { Login, Register, Select, Exterior, Interior, Summary };
