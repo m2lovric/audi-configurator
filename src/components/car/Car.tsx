@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './car.scss';
-import { CarI, modelI } from 'modules/interfaces';
+import { CarInterface } from 'modules/interfaces/car';
+import { Model } from 'modules/interfaces/model';
 import { useRecoilState } from 'recoil';
 import {
   colorsAtom,
@@ -11,13 +12,13 @@ import {
   wheelsAtom,
 } from 'modules/state/atoms';
 
-const Car = ({ data }: CarI) => {
+const Car = ({ data }: CarInterface) => {
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
   const [selectModels, setSelectModels] =
-    useRecoilState<modelI[]>(selectModelAtom);
+    useRecoilState<Model[]>(selectModelAtom);
 
   const handleUpdate = () => {
     const car = selectModels.filter(

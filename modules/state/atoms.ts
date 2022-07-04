@@ -1,6 +1,7 @@
 import { User } from 'firebase/auth';
 import { atom } from 'recoil';
-import { modelConfigI, modelI } from '../interfaces/index';
+import { modelConfig } from 'modules/interfaces/modelConfig';
+import { Model } from 'modules/interfaces/model';
 
 export const userStateAtom = atom({
   key: 'user',
@@ -23,7 +24,7 @@ export const selectModelAtom = atom({
 });
 export const configModelsAtom = atom({
   key: 'configModel',
-  default: <modelConfigI>{},
+  default: <modelConfig>{},
 });
 
 export const colorsAtom = atom({
@@ -58,7 +59,7 @@ export const visibleInteriorAtom = atom({
 
 export const userConfiguration = atom({
   key: 'userConfigModel',
-  default: <modelI>{
+  default: <Model>{
     model: '',
     accessories: {
       color: { name: '', price: 0 },

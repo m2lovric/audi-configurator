@@ -22,7 +22,7 @@ import { sides } from '../exterior/Exterior';
 import './summary.scss';
 import { doc, setDoc } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
-import { onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Summary = () => {
   const { year, model, id } = useParams();

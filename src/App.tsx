@@ -18,13 +18,13 @@ import {
   deleteDoc,
 } from 'firebase/firestore';
 import { db } from 'modules/firebase/index';
-import { modelI, modelIdI } from 'modules/interfaces';
+import { Model } from 'modules/interfaces/model';
 import dots from './assets/Union.svg';
 
 function App() {
   const user = useRecoilValue(userStateAtom);
   const userId = useRecoilValue(userIdAtom);
-  const [savedConfigs, setSavedConfigs] = useState<modelIdI[]>([]);
+  const [savedConfigs, setSavedConfigs] = useState<Model[]>([]);
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [modelConfig, setModelConfig] = useRecoilState(configModelsAtom);
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ function App() {
   };
 
   const handleEdit = async (
-    data: modelI,
+    data: Model,
     year: number,
     fullName?: string,
     id?: string
@@ -101,7 +101,7 @@ function App() {
                     <article className='list__section'>
                       <p
                         onClick={() =>
-                          handleEdit(el, el.year, el.fullName, el.id)
+                          handleEdit(el, el.year!, el.fullName, el.id)
                         }
                         className='text'
                       >
@@ -110,7 +110,7 @@ function App() {
                     </article>
                     <article
                       className='list__section'
-                      onClick={() => handleDelete(el.id)}
+                      onClick={() => handleDelete(el.id!)}
                     >
                       <p className='delete'>Delete</p>
                     </article>

@@ -17,8 +17,8 @@ import {
   userConfiguration,
   interiorAtom,
   totalPriceAtom,
-} from '../../../../modules/state/atoms';
-import { modelConfigI } from '../../../../modules/interfaces';
+} from 'modules/state/atoms';
+import { modelConfig } from 'modules/interfaces/modelConfig';
 
 export const sides = [
   { id: 1, view: 'Front Left' },
@@ -42,7 +42,7 @@ const Exterior = () => {
   const [photos, setPhotos] = useState<{ url: string; id: number }[]>([]);
   const [fetched, setFetched] = useState(false);
   const [modelConfig, setModelConfig] =
-    useRecoilState<modelConfigI>(configModelsAtom);
+    useRecoilState<modelConfig>(configModelsAtom);
 
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
 
