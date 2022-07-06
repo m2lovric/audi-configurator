@@ -7,7 +7,7 @@ import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './exterior.scss';
 import { collection, getDocs } from 'firebase/firestore';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { selector, useRecoilState, useRecoilValue } from 'recoil';
 import {
   colorsAtom,
   configModelsAtom,
@@ -28,13 +28,22 @@ export const sides = [
   { id: 5, view: 'Back Left' },
 ];
 
+const accessoriesState = selector({
+  key: 'userInfo',
+  get: ({ get }) => {
+    const colorsState = get(colorsAtom);
+    const wheelsState = get(wheelsAtom);
+
+    return { colorsState, wheelsState };
+  },
+});
+
 const Exterior = () => {
   const { year, model, id } = useParams();
   let modelShort = model?.split(' ')[1];
 
+  const { colorsState, wheelsState } = useRecoilValue(accessoriesState);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
-  const [colorsState, setColorState] = useRecoilState(colorsAtom);
-  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
 
   const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
