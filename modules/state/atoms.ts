@@ -4,17 +4,17 @@ import { modelConfig } from 'modules/interfaces/modelConfig';
 import { Model } from 'modules/interfaces/model';
 
 export const userStateAtom = atom({
-  key: 'user',
+  key: 'userState',
   default: false,
 });
 
 export const userAtom = atom({
-  key: 'userAtom',
+  key: 'user',
   default: <User>{},
 });
 
 export const userIdAtom = atom({
-  key: 'userIdAtom',
+  key: 'userId',
   default: '',
 });
 

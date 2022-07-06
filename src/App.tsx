@@ -14,30 +14,12 @@ import {
 } from 'firebase/firestore';
 import { db } from 'modules/firebase/index';
 import { Model } from 'modules/interfaces/model';
+import { userStateAtom, userIdAtom } from 'modules/state/atoms';
 import dots from './assets/Union.svg';
 
-const userStateAtom = atom({
-  key: 'userState',
-  default: false,
-});
-
-const userIdAtom = atom({
-  key: 'userId',
-  default: '',
-});
-
-const userInfoSelector = selector({
-  key: 'userInfo',
-  get: ({ get }) => {
-    const user = get(userStateAtom);
-    const userId = get(userIdAtom);
-
-    return { user, userId };
-  },
-});
-
 function App() {
-  const { user, userId } = useRecoilValue(userInfoSelector);
+  const user = useRecoilValue(userStateAtom);
+  const userId = useRecoilValue(userIdAtom);
   const [savedConfigs, setSavedConfigs] = useState<Model[]>([]);
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [modelConfig, setModelConfig] = useRecoilState(configModelsAtom);
