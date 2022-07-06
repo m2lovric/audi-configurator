@@ -33,9 +33,10 @@
     width: 40%;
     text-align: center;
 
-    span {
+    .link {
       color: v.$primary;
       font-weight: 700;
+      text-decoration: none;
     }
   }
 }

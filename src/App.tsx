@@ -120,7 +120,10 @@ function App() {
             <img src={car} alt='car' className='home__img' />
             <p className='home__text'>
               You haven't configured any cars yet. You may choose to
-              <span> configure some now.</span>
+              <Link to={'/select'} className='link'>
+                {' '}
+                configure some now.
+              </Link>
             </p>
           </>
         )}
