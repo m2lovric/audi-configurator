@@ -18,6 +18,7 @@ const Navigation = () => {
   const handleLogout = () => {
     signOut(auth).then(() => {
       setUserState(false);
+      navigate('/login');
     });
   };
 
