@@ -71,7 +71,7 @@ const Colors = () => {
     <section className='colors'>
       <section className='colors__heading'>
         <h3>Interior</h3>
-        <button className='colors__btn' onClick={() => handleCancel()}>
+        <button className='colors__btn' onClick={handleCancel}>
           <img src={cancel} alt='cancel' />
         </button>
       </section>
@@ -95,7 +95,7 @@ const Colors = () => {
         <p className='text'>TOTAL</p>
         <p className='price'>{totalPrice}&euro;</p>
       </section>
-      <button className='btn-primary-lg' onClick={() => handleCancel()}>
+      <button className='btn-primary-lg' onClick={handleCancel}>
         Done
       </button>
     </section>
