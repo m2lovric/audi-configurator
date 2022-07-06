@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react';
 import logo from '../../assets/logo.svg';
 import hamburger from '@/assets/hamburger.svg';
 import './style.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from 'modules/firebase';
 import { useRecoilState } from 'recoil';
-import {
-  userAtom,
-  userIdAtom,
-  userStateAtom,
-} from '../../../modules/state/atoms';
+import { userIdAtom, userStateAtom } from 'modules/state/atoms';
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();
   const [userState, setUserState] = useRecoilState(userStateAtom);
   const [userId, setUserId] = useRecoilState(userIdAtom);
   const [menu, setMenu] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     signOut(auth).then(() => {
@@ -28,11 +25,12 @@ const Navigation = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        setUserState(true);
         setUserId(user.uid);
+        setUserState(true);
       } else {
         setUser(undefined);
         setUserState(false);
+        navigate('/login');
       }
     });
   }, []);

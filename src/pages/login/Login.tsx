@@ -15,13 +15,12 @@ import googleImg from '@/assets/btn_google_signin_light_normal_web.png';
 const Login = () => {
   const [data, setData] = useState({ email: '', password: '' });
   const [userState, setUserState] = useRecoilState(userStateAtom);
-  const user = useRecoilValue(userStateAtom);
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
 
   useEffect(() => {
-    user && navigate('/');
-  }, [user]);
+    userState && navigate('/');
+  }, [userState]);
 
   const handleSignWithGoogle = () => {
     signInWithPopup(auth, provider)
