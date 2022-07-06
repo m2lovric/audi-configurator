@@ -62,13 +62,6 @@
     margin-left: auto;
     cursor: pointer;
     position: relative;
-
-    &:hover {
-      .list {
-        display: block;
-      }
-    }
-
     img{
       height: 16px;
       width: 4px;
@@ -76,7 +69,7 @@
 
     .list {
       display: none;
-      top: 10px;
+      top: 25px;
       right: 0px;
       width: 212px;
       background-color: v.$background-2;
