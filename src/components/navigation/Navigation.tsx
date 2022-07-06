@@ -16,6 +16,7 @@ const Navigation = () => {
   const [user, setUser] = useState<User>();
   const [userState, setUserState] = useRecoilState(userStateAtom);
   const [userId, setUserId] = useRecoilState(userIdAtom);
+  const [menu, setMenu] = useState(false);
 
   const handleLogout = () => {
     signOut(auth).then(() => {
@@ -44,9 +45,12 @@ const Navigation = () => {
         </Link>
 
         <section className='nav__menu'>
-          <img src={hamburger} alt='menu' />
+          <img src={hamburger} alt='menu' onClick={() => setMenu(!menu)} />
           {user ? (
-            <section className='list'>
+            <section
+              className='list'
+              style={menu ? { display: 'block' } : { display: 'none' }}
+            >
               <article className='list__section'>
                 <Link to={'/'} className='text'>
                   My saved configurations
@@ -59,7 +63,10 @@ const Navigation = () => {
               </article>
             </section>
           ) : (
-            <section className='list'>
+            <section
+              className='list'
+              style={menu ? { display: 'block' } : { display: 'none' }}
+            >
               <article className='list__section'>
                 <Link to={'/login'} className='text'>
                   Login
