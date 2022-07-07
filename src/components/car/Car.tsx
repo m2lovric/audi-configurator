@@ -5,20 +5,19 @@ import { CarInterface } from 'modules/interfaces/car';
 import { Model } from 'modules/interfaces/model';
 import { useRecoilState } from 'recoil';
 import {
-  colorsAtom,
-  interiorAtom,
-  selectModelAtom,
+  colors,
+  interior,
+  selectModel,
   userConfiguration,
-  wheelsAtom,
-} from 'modules/state/atoms';
+  wheels,
+} from 'modules/state/index';
 
 const Car = ({ data }: CarInterface) => {
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
-  const [colorsState, setColorState] = useRecoilState(colorsAtom);
-  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
-  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
-  const [selectModels, setSelectModels] =
-    useRecoilState<Model[]>(selectModelAtom);
+  const [colorsState, setColorState] = useRecoilState(colors);
+  const [wheelsState, setWheelsState] = useRecoilState(wheels);
+  const [interiorState, setInteriorState] = useRecoilState(interior);
+  const [selectModels, setSelectModels] = useRecoilState<Model[]>(selectModel);
 
   const handleUpdate = () => {
     const car = selectModels.filter(

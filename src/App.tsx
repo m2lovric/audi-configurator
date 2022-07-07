@@ -2,7 +2,12 @@ import { Layout } from './components';
 import './app.scss';
 import car from './assets/front-left-2.png';
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
-import { configModelsAtom, userConfiguration } from 'modules/state/atoms';
+import {
+  configModels,
+  userConfiguration,
+  userState,
+  userId,
+} from 'modules/state/index';
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
@@ -14,16 +19,15 @@ import {
 } from 'firebase/firestore';
 import { db } from 'modules/firebase/index';
 import { Model } from 'modules/interfaces/model';
-import { userStateAtom, userIdAtom } from 'modules/state/atoms';
 import dots from './assets/Union.svg';
 
 function App() {
-  const user = useRecoilValue(userStateAtom);
-  const userId = useRecoilValue(userIdAtom);
+  const user = useRecoilValue(userState);
+  const uid = useRecoilValue(userId);
   const [savedConfigs, setSavedConfigs] = useState<Model[]>([]);
   const [menu, setMenu] = useState({ id: '', active: false });
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
-  const [modelConfig, setModelConfig] = useRecoilState(configModelsAtom);
+  const [modelConfig, setModelConfig] = useRecoilState(configModels);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,7 +37,7 @@ function App() {
   }, [user]);
 
   const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, userId));
+    const querySnapshot = await getDocs(collection(db, uid));
     querySnapshot.docs.map((el: DocumentData) => {
       setSavedConfigs((oldArr) => [...oldArr, { id: el.id, ...el.data() }]);
     });
@@ -64,7 +68,7 @@ function App() {
 
   const handleDelete = async (id: string) => {
     setSavedConfigs((oldArr) => oldArr.filter((el) => el.id !== id));
-    await deleteDoc(doc(db, userId, id));
+    await deleteDoc(doc(db, uid, id));
   };
 
   return (
