@@ -21,7 +21,7 @@ function App() {
   const user = useRecoilValue(userStateAtom);
   const userId = useRecoilValue(userIdAtom);
   const [savedConfigs, setSavedConfigs] = useState<Model[]>([]);
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState({ id: '', active: false });
   const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
   const [modelConfig, setModelConfig] = useRecoilState(configModelsAtom);
   const navigate = useNavigate();
@@ -95,12 +95,16 @@ function App() {
                 </article>
                 <article
                   className='savedModel__menu'
-                  onClick={() => setMenu(!menu)}
+                  onClick={() => setMenu({ id: el.id!, active: !menu.active })}
                 >
                   <img src={dots} alt='menu' />
                   <section
                     className='list'
-                    style={menu ? { display: 'block' } : { display: 'none' }}
+                    style={
+                      menu.id == el.id && menu.active
+                        ? { display: 'block' }
+                        : { display: 'none' }
+                    }
                   >
                     <article className='list__section'>
                       <p
