@@ -55,7 +55,7 @@ const Login = () => {
   return (
     <Layout>
       <section className='login'>
-        <section className='login__form'>
+        <form className='login__form'>
           <h1 className='register__title'>
             AUDI <span>CONFIGURATOR</span>
           </h1>
@@ -101,7 +101,7 @@ const Login = () => {
           <Link to={'/register'} className='btn-white'>
             Create Account
           </Link>
-        </section>
+        </form>
       </section>
     </Layout>
   );

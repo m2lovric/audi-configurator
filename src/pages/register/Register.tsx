@@ -36,7 +36,7 @@ const Register = () => {
   return (
     <Layout>
       <section className='register'>
-        <section className='register__form'>
+        <form className='register__form'>
           <h1 className='register__title'>
             AUDI <span>CONFIGURATOR</span>
           </h1>
@@ -83,7 +83,7 @@ const Register = () => {
           <Link to={'/login'} className='btn-white'>
             Login
           </Link>
-        </section>
+        </form>
       </section>
     </Layout>
   );

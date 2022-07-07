@@ -28,10 +28,11 @@ const Navigation = () => {
         setUser(user);
         setUserId(user.uid);
         setUserState(true);
+        localStorage.setItem('user', `${user.uid}`);
       } else {
         setUser(undefined);
         setUserState(false);
-        navigate('/login');
+        localStorage.setItem('user', '');
       }
     });
   }, []);
