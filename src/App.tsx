@@ -1,7 +1,7 @@
 import { Layout } from './components';
 import './app.scss';
 import car from './assets/front-left-2.png';
-import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   configModelsAtom,
   userConfigurationAtom,

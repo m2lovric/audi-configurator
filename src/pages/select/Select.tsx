@@ -8,7 +8,7 @@ import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './select.scss';
 import { useRecoilState } from 'recoil';
-import { selectModelAtom } from 'modules/state/atoms';
+import { selectModelAtom } from 'modules/state/index';
 
 const Select = () => {
   const [models, setModels] = useState<CarInterface[]>([]);
