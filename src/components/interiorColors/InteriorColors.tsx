@@ -4,12 +4,11 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { storage } from 'modules/firebase';
 import {
   configModelsAtom,
-  colorsAtom,
   interiorAtom,
   visibleInteriorAtom,
-  userConfiguration,
+  userConfigurationAtom,
   totalPriceAtom,
-} from '../../../modules/state/atoms';
+} from 'modules/state/index';
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
 
@@ -22,7 +21,9 @@ const Colors = () => {
       interiorAtom
     );
 
-  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [selectedValues, setSelectedValues] = useRecoilState(
+    userConfigurationAtom
+  );
   const [visibleInterior, setVisibleInterior] =
     useRecoilState(visibleInteriorAtom);
 

@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { Model } from '../interfaces/model';
 
-export const userConfiguration = atom({
+export const userConfigurationAtom = atom({
   key: 'userConfigModel',
   default: <Model>{
     model: '',

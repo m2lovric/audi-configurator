@@ -14,10 +14,10 @@ import {
   wheelsAtom,
   visibleAtom,
   visibleAtomA,
-  userConfiguration,
+  userConfigurationAtom,
   interiorAtom,
   totalPriceAtom,
-} from 'modules/state/atoms';
+} from 'modules/state/index';
 import { modelConfig } from 'modules/interfaces/modelConfig';
 
 export const sides = [
@@ -53,7 +53,9 @@ const Exterior = () => {
   const [modelConfig, setModelConfig] =
     useRecoilState<modelConfig>(configModelsAtom);
 
-  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [selectedValues, setSelectedValues] = useRecoilState(
+    userConfigurationAtom
+  );
 
   useEffect(() => {
     setModel();

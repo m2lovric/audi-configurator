@@ -6,18 +6,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { auth } from 'modules/firebase';
 import { useRecoilState } from 'recoil';
-import { userId, userState } from 'modules/state/index';
+import { userIdAtom, userStateAtom } from 'modules/state/index';
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();
-  const [userData, setUserData] = useRecoilState(userState);
-  const [id, setId] = useRecoilState(userId);
+  const [userState, setUserState] = useRecoilState(userStateAtom);
+  const [userId, setUserId] = useRecoilState(userIdAtom);
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     signOut(auth).then(() => {
-      setUserData(false);
+      setUserState(false);
       navigate('/login');
     });
   };
@@ -26,12 +26,12 @@ const Navigation = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        setId(user.uid);
-        setUserData(true);
+        setUserId(user.uid);
+        setUserState(true);
         localStorage.setItem('user', `${user.uid}`);
       } else {
         setUser(undefined);
-        setUserData(false);
+        setUserState(false);
         localStorage.setItem('user', '');
       }
     });

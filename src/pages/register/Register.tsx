@@ -4,14 +4,14 @@ import './style.scss';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from 'modules/firebase';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState } from 'modules/state/index';
+import { userStateAtom } from 'modules/state/index';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [data, setData] = useState({ name: '', email: '', password: '' });
-  const [userData, setUserData] = useRecoilState(userState);
+  const [userData, setUserData] = useRecoilState(userStateAtom);
   const navigate = useNavigate();
-  const user = useRecoilValue(userState);
+  const user = useRecoilValue(userStateAtom);
 
   useEffect(() => {
     user && navigate('/');

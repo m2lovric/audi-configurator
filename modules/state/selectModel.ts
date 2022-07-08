@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const selectModel = atom({
+export const selectModelAtom = atom({
   key: 'selectModel',
   default: <any>[],
 });

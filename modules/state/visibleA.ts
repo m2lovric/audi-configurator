@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const visibleA = atom({
+export const visibleAtomA = atom({
   key: 'visibleModelA',
   default: { colors: false, wheels: false },
 });

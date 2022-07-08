@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const visibleInterior = atom({
+export const visibleInteriorAtom = atom({
   key: 'visibleInteriorModel',
   default: false,
 });

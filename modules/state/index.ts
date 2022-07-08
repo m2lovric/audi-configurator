@@ -1,29 +1,29 @@
-import { colors } from './colors';
-import { configModels } from './configModels';
-import { interior } from './interior';
-import { selectModel } from './selectModel';
-import { totalPrice } from './totalPrice';
-import { user } from './user';
-import { userConfiguration } from './userConfiguration';
-import { userId } from './userId';
-import { userState } from './userState';
-import { visible } from './visible';
-import { visibleA } from './visibleA';
-import { visibleInterior } from './visibleInterior';
-import { wheels } from './wheels';
+import { colorsAtom } from './colors';
+import { configModelsAtom } from './configModels';
+import { interiorAtom } from './interior';
+import { selectModelAtom } from './selectModel';
+import { totalPriceAtom } from './totalPrice';
+import { userAtom } from './user';
+import { userConfigurationAtom } from './userConfiguration';
+import { userIdAtom } from './userId';
+import { userStateAtom } from './userState';
+import { visibleAtom } from './visible';
+import { visibleAtomA } from './visibleA';
+import { visibleInteriorAtom } from './visibleInterior';
+import { wheelsAtom } from './wheels';
 
 export {
-  colors,
-  configModels,
-  interior,
-  selectModel,
-  totalPrice,
-  user,
-  userConfiguration,
-  userId,
-  userState,
-  visible,
-  visibleA,
-  visibleInterior,
-  wheels,
+  colorsAtom,
+  configModelsAtom,
+  interiorAtom,
+  selectModelAtom,
+  totalPriceAtom,
+  userAtom,
+  userConfigurationAtom,
+  userIdAtom,
+  userStateAtom,
+  visibleAtom,
+  visibleAtomA,
+  visibleInteriorAtom,
+  wheelsAtom,
 };

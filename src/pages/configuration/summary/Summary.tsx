@@ -12,9 +12,9 @@ import {
   colorsAtom,
   interiorAtom,
   totalPriceAtom,
-  userConfiguration,
+  userConfigurationAtom,
   wheelsAtom,
-} from 'modules/state/atoms';
+} from 'modules/state/index';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { storage, db, auth } from 'modules/firebase';
@@ -32,7 +32,9 @@ const Summary = () => {
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
-  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [selectedValues, setSelectedValues] = useRecoilState(
+    userConfigurationAtom
+  );
   const [photos, setPhotos] = useState<{ url: string; id: number }[]>([]);
   const [user, setUser] = useState<string>('');
   const navigate = useNavigate();

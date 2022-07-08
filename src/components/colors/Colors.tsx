@@ -7,9 +7,9 @@ import {
   colorsAtom,
   visibleAtom,
   visibleAtomA,
-  userConfiguration,
+  userConfigurationAtom,
   totalPriceAtom,
-} from 'modules/state/atoms';
+} from 'modules/state/index';
 import '../accessories.scss';
 import cancel from '@/assets/X.png';
 
@@ -20,7 +20,9 @@ const Colors = () => {
   const [visible, setVisible] = useRecoilState(visibleAtom);
   const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
 
-  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [selectedValues, setSelectedValues] = useRecoilState(
+    userConfigurationAtom
+  );
   const [colors, setColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(colorsAtom);
 

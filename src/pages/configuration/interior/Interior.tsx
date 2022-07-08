@@ -11,10 +11,10 @@ import {
   colorsAtom,
   interiorAtom,
   totalPriceAtom,
-  userConfiguration,
+  userConfigurationAtom,
   visibleInteriorAtom,
   wheelsAtom,
-} from 'modules/state/atoms';
+} from 'modules/state/index';
 
 const Interior = () => {
   const { year, model, id } = useParams();
@@ -32,7 +32,9 @@ const Interior = () => {
   const [photos, setPhotos] = useState<string[]>([]);
   const [fetched, setFetched] = useState(false);
 
-  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [selectedValues, setSelectedValues] = useRecoilState(
+    userConfigurationAtom
+  );
 
   useEffect(() => {
     setColorState([]);

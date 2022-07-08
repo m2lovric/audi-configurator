@@ -3,10 +3,10 @@ import './app.scss';
 import car from './assets/front-left-2.png';
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 import {
-  configModels,
-  userConfiguration,
-  userState,
-  userId,
+  configModelsAtom,
+  userConfigurationAtom,
+  userStateAtom,
+  userIdAtom,
 } from 'modules/state/index';
 import { useNavigate, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -22,22 +22,24 @@ import { Model } from 'modules/interfaces/model';
 import dots from './assets/Union.svg';
 
 function App() {
-  const user = useRecoilValue(userState);
-  const uid = useRecoilValue(userId);
+  const userState = useRecoilValue(userStateAtom);
+  const userId = useRecoilValue(userIdAtom);
   const [savedConfigs, setSavedConfigs] = useState<Model[]>([]);
   const [menu, setMenu] = useState({ id: '', active: false });
-  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
-  const [modelConfig, setModelConfig] = useRecoilState(configModels);
+  const [selectedValues, setSelectedValues] = useRecoilState(
+    userConfigurationAtom
+  );
+  const [modelConfig, setModelConfig] = useRecoilState(configModelsAtom);
   const navigate = useNavigate();
 
   useEffect(() => {
     const localUser = localStorage.getItem('user');
     localUser == '' && navigate('/login');
     getData();
-  }, [user]);
+  }, [userState]);
 
   const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, uid));
+    const querySnapshot = await getDocs(collection(db, userId));
     querySnapshot.docs.map((el: DocumentData) => {
       setSavedConfigs((oldArr) => [...oldArr, { id: el.id, ...el.data() }]);
     });
@@ -68,7 +70,7 @@ function App() {
 
   const handleDelete = async (id: string) => {
     setSavedConfigs((oldArr) => oldArr.filter((el) => el.id !== id));
-    await deleteDoc(doc(db, uid, id));
+    await deleteDoc(doc(db, userId, id));
   };
 
   return (

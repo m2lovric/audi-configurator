@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const totalPrice = atom({
+export const totalPriceAtom = atom({
   key: 'totalPrice',
   default: 0,
 });

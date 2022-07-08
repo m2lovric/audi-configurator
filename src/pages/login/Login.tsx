@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider,
 } from 'firebase/auth';
 import { auth } from 'modules/firebase';
-import { userStateAtom } from 'modules/state/atoms';
+import { userStateAtom } from 'modules/state/index';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
 import googleImg from '@/assets/btn_google_signin_light_normal_web.png';

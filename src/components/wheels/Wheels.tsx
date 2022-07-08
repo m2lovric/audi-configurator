@@ -8,14 +8,16 @@ import {
   wheelsAtom,
   visibleAtom,
   visibleAtomA,
-  userConfiguration,
+  userConfigurationAtom,
   totalPriceAtom,
-} from '../../../modules/state/atoms';
+} from 'modules/state/index';
 
 const Wheels = () => {
   const modelConfig = useRecoilValue(configModelsAtom);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
-  const [selectedValues, setSelectedValues] = useRecoilState(userConfiguration);
+  const [selectedValues, setSelectedValues] = useRecoilState(
+    userConfigurationAtom
+  );
   const [wheels, setWheels] =
     useRecoilState<{ name: string; url: string; price: number }[]>(wheelsAtom);
 
