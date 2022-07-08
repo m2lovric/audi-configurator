@@ -1,56 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Layout } from '@/components';
 import './login.scss';
-import {
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from 'firebase/auth';
-import { auth } from 'modules/firebase';
 import { userStateAtom } from 'modules/state/index';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
 import googleImg from '@/assets/btn_google_signin_light_normal_web.png';
+import { handleSignWithGoogle, handleSubmit } from './services';
+import { userDataAtom } from './userData';
 
 const Login = () => {
-  const [data, setData] = useState({ email: '', password: '' });
-  const [userState, setUserState] = useRecoilState(userStateAtom);
+  const [data, setData] = useRecoilState(userDataAtom);
+  const userState = useRecoilValue(userStateAtom);
   const navigate = useNavigate();
-  const provider = new GoogleAuthProvider();
 
   useEffect(() => {
     userState && navigate('/');
   }, [userState]);
-
-  const handleSignWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const user = result.user;
-        setUserState(true);
-        navigate('/');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
-  };
-
-  const handleSubmit = () => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((res) => {
-        setData({ email: '', password: '' });
-        setUserState(true);
-        navigate('/');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
-  };
 
   return (
     <Layout>
