@@ -5,13 +5,14 @@ import { userStateAtom } from 'modules/state/index';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Link, useNavigate } from 'react-router-dom';
 import googleImg from '@/assets/btn_google_signin_light_normal_web.png';
-import { handleSignWithGoogle, handleSubmit } from './services';
+import useHandleLogin from './services';
 import { userDataAtom } from './userData';
 
 const Login = () => {
   const [data, setData] = useRecoilState(userDataAtom);
   const userState = useRecoilValue(userStateAtom);
   const navigate = useNavigate();
+  const [handleSignWithGoogle, handleSubmit] = useHandleLogin();
 
   useEffect(() => {
     userState && navigate('/');
@@ -20,7 +21,7 @@ const Login = () => {
   return (
     <Layout>
       <section className='login'>
-        <form className='login__form'>
+        <section className='login__form'>
           <h1 className='register__title'>
             AUDI <span>CONFIGURATOR</span>
           </h1>
@@ -48,7 +49,7 @@ const Login = () => {
             onChange={(e) => setData({ ...data, password: e.target.value })}
             value={data.password}
           />
-          <button className='btn-primary-lg' onClick={() => handleSubmit()}>
+          <button className='btn-primary-lg' onClick={handleSubmit}>
             Login
           </button>
           <section className='login__or'>
@@ -56,17 +57,14 @@ const Login = () => {
             <p>or</p>
             <article className='line'></article>
           </section>
-          <section
-            className='login__google'
-            onClick={() => handleSignWithGoogle()}
-          >
+          <section className='login__google' onClick={handleSignWithGoogle}>
             <img src={googleImg} alt='google' />
           </section>
           <br />
           <Link to={'/register'} className='btn-white'>
             Create Account
           </Link>
-        </form>
+        </section>
       </section>
     </Layout>
   );

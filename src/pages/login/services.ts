@@ -10,37 +10,45 @@ import { useNavigate } from 'react-router-dom';
 import { atom, useRecoilState } from 'recoil';
 import { userDataAtom } from './userData';
 
-const provider = new GoogleAuthProvider();
-const [userState, setUserState] = useRecoilState(userStateAtom);
-const [userData, setUserData] = useRecoilState(userDataAtom);
-const navigate = useNavigate();
+const useHandleLogin = () => {
+  const provider = new GoogleAuthProvider();
+  const [userState, setUserState] = useRecoilState(userStateAtom);
+  const [userData, setUserData] = useRecoilState(userDataAtom);
+  const navigate = useNavigate();
 
-export const handleSignWithGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const user = result.user;
-      setUserState(true);
-      navigate('/');
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.customData.email;
-      const credential = GoogleAuthProvider.credentialFromError(error);
-    });
+  const handleSignWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const user = result.user;
+        setUserState(true);
+        navigate('/');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  };
+
+  const handleSubmit = () => {
+    console.log(userData.email, userData.password);
+    signInWithEmailAndPassword(auth, userData.email, userData.password)
+      .then((res) => {
+        console.log('signin ', res);
+        setUserState(true);
+        setUserData({ email: '', password: '' });
+        navigate('/');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error);
+      });
+  };
+
+  return [handleSignWithGoogle, handleSubmit];
 };
 
-export const handleSubmit = () => {
-  signInWithEmailAndPassword(auth, userData.email, userData.password)
-    .then((res) => {
-      setUserData({ email: '', password: '' });
-      setUserState(true);
-      navigate('/');
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(error);
-    });
-};
+export default useHandleLogin;
