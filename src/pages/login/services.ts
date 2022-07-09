@@ -33,10 +33,8 @@ const useHandleLogin = () => {
   };
 
   const handleSubmit = () => {
-    console.log(userData.email, userData.password);
     signInWithEmailAndPassword(auth, userData.email, userData.password)
       .then((res) => {
-        console.log('signin ', res);
         setUserState(true);
         setUserData({ email: '', password: '' });
         navigate('/');

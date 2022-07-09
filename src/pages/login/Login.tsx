@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from '@/components';
 import './login.scss';
 import { userStateAtom } from 'modules/state/index';
