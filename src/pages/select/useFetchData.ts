@@ -12,6 +12,7 @@ const useFetchData = () => {
     useRecoilState<Model[]>(selectModelAtom);
 
   useEffect(() => {
+    setModels([]);
     fetchData();
   }, []);
 
