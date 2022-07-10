@@ -19,6 +19,8 @@ import {
   totalPriceAtom,
 } from 'modules/state/index';
 import { modelConfig } from 'modules/interfaces/modelConfig';
+import useGetPhotos from '../getPhotos';
+import { exteriorPhotos } from '../photosAtoms';
 
 export const sides = [
   { id: 1, view: 'Front Left' },
@@ -48,35 +50,29 @@ const Exterior = () => {
 
   const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
   const [visible, setVisible] = useRecoilState(visibleAtom);
-  const [photos, setPhotos] = useState<{ url: string; id: number }[]>([]);
   const [fetched, setFetched] = useState(false);
   const [modelConfig, setModelConfig] =
     useRecoilState<modelConfig>(configModelsAtom);
-
   const [selectedValues, setSelectedValues] = useRecoilState(
     userConfigurationAtom
   );
+  const [handleGetPhotos, sortPhotos] = useGetPhotos(exteriorPhotos);
+  const [photos, setPhotos] = useRecoilState(exteriorPhotos);
 
   useEffect(() => {
-    setModel();
-    fetchData();
     setInteriorState([]);
+    fetchData();
     setPhotos([]);
 
-    sides.map((el) => {
-      const starsRef = ref(
-        storage,
-        `${modelShort}/Car=${modelShort}, View=${el.view}, Color=${selectedValues.accessories.color.name}, Wheel ${selectedValues.accessories.wheel.name}.png`
-      );
+    handleGetPhotos(
+      selectedValues.accessories.color.name,
+      selectedValues.accessories.wheel.name,
+      undefined,
+      modelShort!,
+      sides
+    );
 
-      getDownloadURL(starsRef)
-        .then((url) => {
-          setPhotos((oldArr) => [...oldArr, { url: url, id: el.id }]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    sortPhotos;
 
     setTotalPrice(
       selectedValues.price +
@@ -85,14 +81,6 @@ const Exterior = () => {
         selectedValues.accessories.wheel.price
     );
   }, [selectedValues.accessories]);
-
-  const setModel = () => {
-    setSelectedValues({
-      ...selectedValues,
-      model: modelShort,
-      fullName: model,
-    });
-  };
 
   const fetchData = async () => {
     const querySnapshot = await getDocs(collection(db, 'config-models'));
@@ -115,7 +103,7 @@ const Exterior = () => {
             <section className='exterior__slider__container'>
               <SplideTrack>
                 {photos &&
-                  photos
+                  [...photos]
                     .sort((a, b) => a.id - b.id)
                     .map((el) => {
                       return (

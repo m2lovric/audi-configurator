@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Layout, ConfiguratorNav, InteriorColors } from '@/components';
-import { storage } from 'modules/firebase';
-import { ref, getDownloadURL } from 'firebase/storage';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import '../exterior/exterior.scss';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   colorsAtom,
   interiorAtom,
@@ -15,46 +13,43 @@ import {
   visibleInteriorAtom,
   wheelsAtom,
 } from 'modules/state/index';
+import { fetchedAtom } from '../fetchedAtom';
+import { interiorPhotos } from '../photosAtoms';
+import useGetPhotos from '../getPhotos';
 
 const Interior = () => {
   const { year, model, id } = useParams();
-  const modelShort = model?.split(' ')[1];
-  const sides = ['Dash', 'Seats'];
+  let modelShort = model?.split(' ')[1];
+
+  const sides = [
+    { id: 1, view: 'Dash' },
+    { id: 2, view: 'Seats' },
+  ];
 
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
   const [colorsState, setColorState] = useRecoilState(colorsAtom);
   const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
-
   const [visibleInterior, setVisibleInterior] =
     useRecoilState(visibleInteriorAtom);
-
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [fetched, setFetched] = useState(false);
-
-  const [selectedValues, setSelectedValues] = useRecoilState(
-    userConfigurationAtom
-  );
+  const fetched = useRecoilValue(fetchedAtom);
+  const selectedValues = useRecoilValue(userConfigurationAtom);
+  const [handleGetPhotos, sortPhotos] = useGetPhotos(interiorPhotos);
+  const [photos, setPhotos] = useRecoilState(interiorPhotos);
 
   useEffect(() => {
     setColorState([]);
     setWheelsState([]);
     setPhotos([]);
-    sides.map((el) => {
-      const starsRef = ref(
-        storage,
-        `${modelShort}/Car=${modelShort}, Color=${selectedValues.accessories.interior.name}, View=${el}.png`
-      );
 
-      getDownloadURL(starsRef)
-        .then((url) => {
-          setPhotos((oldArr) => [...oldArr, url]);
-          setFetched(true);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
+    handleGetPhotos(
+      undefined,
+      undefined,
+      selectedValues.accessories.interior.name,
+      modelShort!,
+      sides
+    );
+    sortPhotos;
   }, [selectedValues.accessories]);
 
   return (
@@ -66,13 +61,15 @@ const Interior = () => {
             <section className='exterior__slider__container'>
               <SplideTrack>
                 {photos &&
-                  photos.map((el, i) => {
-                    return (
-                      <SplideSlide key={i}>
-                        <img src={el} alt='car' />
-                      </SplideSlide>
-                    );
-                  })}
+                  [...photos]
+                    .sort((a, b) => a.id - b.id)
+                    .map((el) => {
+                      return (
+                        <SplideSlide key={el.id}>
+                          <img src={el.url} alt='car' />
+                        </SplideSlide>
+                      );
+                    })}
               </SplideTrack>
             </section>
             <div className='splide__arrows'>

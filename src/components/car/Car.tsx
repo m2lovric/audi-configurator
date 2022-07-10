@@ -27,11 +27,10 @@ const Car = ({ data }: CarInterface) => {
       (el) => el.model == data.model.split(' ')[1]
     )[0];
 
-    console.log(car.default.color);
-
     setSelectedValues({
       ...selectedValues,
-      model: car?.model?.split(' ')[1],
+      fullName: data.model,
+      model: data.model.split(' ')[1],
       accessories: {
         color: { ...car.default.color },
         interior: { ...car.default.interior },
@@ -39,8 +38,6 @@ const Car = ({ data }: CarInterface) => {
       },
       price: car.price,
     });
-
-    console.log(car);
 
     setColorState([]);
     setWheelsState([]);
@@ -56,7 +53,7 @@ const Car = ({ data }: CarInterface) => {
         <Link
           to={`/configure/exterior/${data.production_year}/${data.model}`}
           className='btn-primary'
-          onClick={() => handleUpdate()}
+          onClick={handleUpdate}
         >
           Configure Now
         </Link>
