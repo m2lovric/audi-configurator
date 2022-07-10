@@ -83,56 +83,64 @@ function App() {
           </Link>
         </header>
         {savedConfigs.length > 0 ? (
-          savedConfigs.map((el) => {
-            return (
-              <section className='savedModel' key={el.id}>
-                <img
-                  src={el.sideUrl}
-                  alt='car side photo'
-                  className='savedModel__car'
-                />
-                <article className='savedModel__right'>
-                  <p className='savedModel__right__year'>{el.year}</p>
-                  <h1 className='savedModel__right__name'>{el.fullName}</h1>
-                  <p className='savedModel__right__color'>
-                    {el.accessories.color.name.toUpperCase()}
-                  </p>
-                  <p className='savedModel__right__date'>{el.createdAt}</p>
-                </article>
-                <article
-                  className='savedModel__menu'
-                  onClick={() => setMenu({ id: el.id!, active: !menu.active })}
-                >
-                  <img src={dots} alt='menu' />
-                  <section
-                    className='list'
-                    style={
-                      menu.id == el.id && menu.active
-                        ? { display: 'block' }
-                        : { display: 'none' }
+          savedConfigs
+            .sort(
+              (a, b) =>
+                parseInt(b.createdAt?.split(' ')[2]!) -
+                parseInt(a.createdAt?.split(' ')[2]!)
+            )
+            .map((el) => {
+              return (
+                <section className='savedModel' key={el.id}>
+                  <img
+                    src={el.sideUrl}
+                    alt='car side photo'
+                    className='savedModel__car'
+                  />
+                  <article className='savedModel__right'>
+                    <p className='savedModel__right__year'>{el.year}</p>
+                    <h1 className='savedModel__right__name'>{el.fullName}</h1>
+                    <p className='savedModel__right__color'>
+                      {el.accessories.color.name.toUpperCase()}
+                    </p>
+                    <p className='savedModel__right__date'>{el.createdAt}</p>
+                  </article>
+                  <article
+                    className='savedModel__menu'
+                    onClick={() =>
+                      setMenu({ id: el.id!, active: !menu.active })
                     }
                   >
-                    <article className='list__section'>
-                      <p
-                        onClick={() =>
-                          handleEdit(el, el.year!, el.fullName, el.id)
-                        }
-                        className='text'
-                      >
-                        Edit configuration
-                      </p>
-                    </article>
-                    <article
-                      className='list__section'
-                      onClick={() => handleDelete(el.id!)}
+                    <img src={dots} alt='menu' />
+                    <section
+                      className='list'
+                      style={
+                        menu.id == el.id && menu.active
+                          ? { display: 'block' }
+                          : { display: 'none' }
+                      }
                     >
-                      <p className='delete'>Delete</p>
-                    </article>
-                  </section>
-                </article>
-              </section>
-            );
-          })
+                      <article className='list__section'>
+                        <p
+                          onClick={() =>
+                            handleEdit(el, el.year!, el.fullName, el.id)
+                          }
+                          className='text'
+                        >
+                          Edit configuration
+                        </p>
+                      </article>
+                      <article
+                        className='list__section'
+                        onClick={() => handleDelete(el.id!)}
+                      >
+                        <p className='delete'>Delete</p>
+                      </article>
+                    </section>
+                  </article>
+                </section>
+              );
+            })
         ) : (
           <>
             <img src={car} alt='car' className='home__img' />
