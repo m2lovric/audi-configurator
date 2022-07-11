@@ -1,15 +1,6 @@
-import { getDownloadURL, ref } from 'firebase/storage';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { storage } from 'modules/firebase';
-import {
-  configModelsAtom,
-  colorsAtom,
-  visibleAtom,
-  visibleAtomA,
-  userConfigurationAtom,
-  totalPriceAtom,
-} from 'modules/state/index';
+import { colorsAtom, totalPriceAtom } from 'modules/state/index';
 import '../accessories.scss';
 import cancel from '@/assets/X.png';
 import useGetPhotos from '../getPhotos';
