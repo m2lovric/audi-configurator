@@ -12,8 +12,10 @@ import {
 } from 'modules/state/index';
 import '../accessories.scss';
 import cancel from '@/assets/X.png';
+import useGetPhotos from '../getPhotos';
 
 const Colors = () => {
+  const [getPhotos] = useGetPhotos();
   const modelConfig = useRecoilValue(configModelsAtom);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
 
@@ -44,26 +46,7 @@ const Colors = () => {
     setTotalPrice(totalPrice - currentColorPrice + el.price);
   };
 
-  useEffect(() => {
-    modelConfig.colors.map((el) => {
-      const starsRef = ref(storage, `color-exterior/Color=${el.name}.png`);
-
-      getDownloadURL(starsRef)
-        .then((url) => {
-          setColors((oldArr) => [
-            ...oldArr,
-            {
-              name: el.name,
-              url: url,
-              price: el.price,
-            },
-          ]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-  }, []);
+  getPhotos('colors', setColors);
 
   return (
     <section className='colors'>

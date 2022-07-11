@@ -11,8 +11,10 @@ import {
 } from 'modules/state/index';
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
+import useGetPhotos from '../getPhotos';
 
 const Colors = () => {
+  const [getPhotos] = useGetPhotos();
   const modelConfig = useRecoilValue(configModelsAtom);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
 
@@ -47,26 +49,7 @@ const Colors = () => {
     setTotalPrice(totalPrice - currentInteriorPrice + el.price);
   };
 
-  useEffect(() => {
-    modelConfig.interior.map((el) => {
-      const starsRef = ref(storage, `color-interior/Color=${el.name}.png`);
-
-      getDownloadURL(starsRef)
-        .then((url) => {
-          setInteriorColors((oldArr) => [
-            ...oldArr,
-            {
-              name: el.name,
-              url: url,
-              price: el.price,
-            },
-          ]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-  }, []);
+  getPhotos('interior', setInteriorColors);
 
   return (
     <section className='colors'>

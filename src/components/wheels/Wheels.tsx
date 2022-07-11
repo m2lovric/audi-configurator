@@ -11,8 +11,10 @@ import {
   userConfigurationAtom,
   totalPriceAtom,
 } from 'modules/state/index';
+import useGetPhotos from '../getPhotos';
 
 const Wheels = () => {
+  const [getPhotos] = useGetPhotos();
   const modelConfig = useRecoilValue(configModelsAtom);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
   const [selectedValues, setSelectedValues] = useRecoilState(
@@ -41,26 +43,7 @@ const Wheels = () => {
     setTotalPrice(totalPrice - currentWheelPrice + el.price);
   };
 
-  useEffect(() => {
-    modelConfig.wheels.map((el) => {
-      const starsRef = ref(storage, `wheels/${el.name}`);
-
-      getDownloadURL(starsRef)
-        .then((url) => {
-          setWheels((oldArr) => [
-            ...oldArr,
-            {
-              name: el.name.split('.')[0],
-              url: url,
-              price: el.price,
-            },
-          ]);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-  }, []);
+  getPhotos('wheels', setWheels);
 
   return (
     <section className='colors'>
