@@ -13,38 +13,17 @@ import {
 import '../accessories.scss';
 import cancel from '@/assets/X.png';
 import useGetPhotos from '../getPhotos';
+import useColorChange from './useColorChange';
+import useHandleCancel from './useHandleCancel';
 
 const Colors = () => {
   const [getPhotos] = useGetPhotos();
-  const modelConfig = useRecoilValue(configModelsAtom);
-  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
+  const [onColorChange] = useColorChange();
+  const [handleCancel] = useHandleCancel();
+  const totalPrice = useRecoilValue(totalPriceAtom);
 
-  const [visible, setVisible] = useRecoilState(visibleAtom);
-  const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
-
-  const [selectedValues, setSelectedValues] = useRecoilState(
-    userConfigurationAtom
-  );
   const [colors, setColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(colorsAtom);
-
-  const handleCancel = () => {
-    setVisible({ ...visible, colors: false });
-    setVisibleA({ ...visibleA, colors: false });
-  };
-
-  const onColorChange = (el: { name: string; url: string; price: number }) => {
-    const currentColorPrice = selectedValues.accessories.color.price;
-    setSelectedValues({
-      ...selectedValues,
-      accessories: {
-        ...selectedValues.accessories,
-        color: { name: el.name, price: el.price },
-      },
-    });
-
-    setTotalPrice(totalPrice - currentColorPrice + el.price);
-  };
 
   getPhotos('colors', setColors);
 
