@@ -12,42 +12,19 @@ import {
 import '../accessories.scss';
 import cancel from '../../assets/X.png';
 import useGetPhotos from '../getPhotos';
+import useHandleCancel from './useHandleCancel';
+import useInteriorChange from './useInteriorChange';
 
 const Colors = () => {
   const [getPhotos] = useGetPhotos();
-  const modelConfig = useRecoilValue(configModelsAtom);
+  const [handleCancel] = useHandleCancel();
+  const [onInteriorChange] = useInteriorChange();
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
 
   const [interiorColors, setInteriorColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(
       interiorAtom
     );
-
-  const [selectedValues, setSelectedValues] = useRecoilState(
-    userConfigurationAtom
-  );
-  const [visibleInterior, setVisibleInterior] =
-    useRecoilState(visibleInteriorAtom);
-
-  const handleCancel = () => {
-    setVisibleInterior(false);
-  };
-
-  const onInteriorChange = (el: {
-    name: string;
-    url: string;
-    price: number;
-  }) => {
-    const currentInteriorPrice = selectedValues.accessories.interior.price;
-    setSelectedValues({
-      ...selectedValues,
-      accessories: {
-        ...selectedValues.accessories,
-        interior: { name: el.name, price: el.price },
-      },
-    });
-    setTotalPrice(totalPrice - currentInteriorPrice + el.price);
-  };
 
   getPhotos('interior', setInteriorColors);
 
