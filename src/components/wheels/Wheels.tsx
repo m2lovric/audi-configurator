@@ -1,47 +1,18 @@
-import { getDownloadURL, ref } from 'firebase/storage';
-import React, { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { storage } from 'modules/firebase';
+import React from 'react';
+import { useRecoilState } from 'recoil';
 import cancel from '@/assets/X.png';
-import {
-  configModelsAtom,
-  wheelsAtom,
-  visibleAtom,
-  visibleAtomA,
-  userConfigurationAtom,
-  totalPriceAtom,
-} from 'modules/state/index';
+import { wheelsAtom, totalPriceAtom } from 'modules/state/index';
 import useGetPhotos from '../getPhotos';
+import useHandleCancel from './useHandleCancel';
+import useWheelsChange from './useWheelsChange';
 
 const Wheels = () => {
   const [getPhotos] = useGetPhotos();
-  const modelConfig = useRecoilValue(configModelsAtom);
+  const [handleCancel] = useHandleCancel();
+  const [onWheelChange] = useWheelsChange();
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
-  const [selectedValues, setSelectedValues] = useRecoilState(
-    userConfigurationAtom
-  );
   const [wheels, setWheels] =
     useRecoilState<{ name: string; url: string; price: number }[]>(wheelsAtom);
-
-  const [visible, setVisible] = useRecoilState(visibleAtom);
-  const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
-
-  const handleCancel = () => {
-    setVisible({ ...visible, wheels: false });
-    setVisibleA({ ...visibleA, wheels: false });
-  };
-
-  const onWheelChange = (el: { name: string; url: string; price: number }) => {
-    const currentWheelPrice = selectedValues.accessories.wheel.price;
-    setSelectedValues({
-      ...selectedValues,
-      accessories: {
-        ...selectedValues.accessories,
-        wheel: { name: el.name.split(' ')[1], price: el.price },
-      },
-    });
-    setTotalPrice(totalPrice - currentWheelPrice + el.price);
-  };
 
   getPhotos('wheels', setWheels);
 
