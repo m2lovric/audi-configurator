@@ -8,7 +8,6 @@ import { userConfigurationAtom } from './userConfiguration';
 import { userIdAtom } from './userId';
 import { userStateAtom } from './userState';
 import { visibleAtom } from './visible';
-import { visibleAtomA } from './visibleA';
 import { visibleInteriorAtom } from './visibleInterior';
 import { wheelsAtom } from './wheels';
 
@@ -23,7 +22,6 @@ export {
   userIdAtom,
   userStateAtom,
   visibleAtom,
-  visibleAtomA,
   visibleInteriorAtom,
   wheelsAtom,
 };

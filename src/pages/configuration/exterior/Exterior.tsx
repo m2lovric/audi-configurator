@@ -8,7 +8,6 @@ import {
   totalPriceAtom,
   userConfigurationAtom,
   visibleAtom,
-  visibleAtomA,
   wheelsAtom,
 } from '@/modules/state/index';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
@@ -47,7 +46,6 @@ const Exterior = () => {
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
   const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
 
-  const [visibleA, setVisibleA] = useRecoilState(visibleAtomA);
   const [visible, setVisible] = useRecoilState(visibleAtom);
   const [fetched, setFetched] = useState(false);
   const [modelConfig, setModelConfig] =
@@ -128,10 +126,9 @@ const Exterior = () => {
           <section
             onClick={() => {
               setVisible({ ...visible, colors: true });
-              setVisibleA({ ...visibleA, colors: true });
             }}
             style={{
-              display: visible.colors || visibleA.wheels ? 'none' : 'block',
+              display: visible.colors || visible.wheels ? 'none' : 'block',
             }}
           >
             {colorsState
@@ -153,10 +150,9 @@ const Exterior = () => {
           <section
             onClick={() => {
               setVisible({ ...visible, wheels: true });
-              setVisibleA({ ...visibleA, wheels: true });
             }}
             style={{
-              display: visible.wheels || visibleA.colors ? 'none' : 'block',
+              display: visible.wheels || visible.colors ? 'none' : 'block',
             }}
           >
             {wheelsState

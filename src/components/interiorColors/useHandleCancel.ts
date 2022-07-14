@@ -7,6 +7,7 @@ const useHandleCancel = () => {
 
   const handleCancel = () => {
     setVisibleInterior(false);
+    console.log(visibleInterior);
   };
   return [handleCancel];
 };
