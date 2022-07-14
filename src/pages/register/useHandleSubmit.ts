@@ -1,5 +1,5 @@
-import { auth } from 'modules/firebase';
-import { userStateAtom } from 'modules/state';
+import { auth } from '@/modules/firebase';
+import { userStateAtom } from '@/modules/state';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';

@@ -1,6 +1,5 @@
-import React from 'react';
-import { Layout, Car } from '@/components';
-import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
+import { Car, Layout } from '@/components';
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import './select.scss';
 import useFetchData from './useFetchData';

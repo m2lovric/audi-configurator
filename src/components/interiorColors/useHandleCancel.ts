@@ -1,5 +1,4 @@
-import React from 'react';
-import { visibleInteriorAtom } from '@/../modules/state';
+import { visibleInteriorAtom } from '@/modules/state';
 import { useRecoilState } from 'recoil';
 
 const useHandleCancel = () => {

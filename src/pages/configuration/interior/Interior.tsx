@@ -1,10 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Layout, ConfiguratorNav, InteriorColors } from '@/components';
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
-import '../exterior/exterior.scss';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { ConfiguratorNav, InteriorColors, Layout } from '@/components';
 import {
   colorsAtom,
   interiorAtom,
@@ -12,11 +6,16 @@ import {
   userConfigurationAtom,
   visibleInteriorAtom,
   wheelsAtom,
-} from 'modules/state/index';
+} from '@/modules/state/index';
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import '../exterior/exterior.scss';
 import { fetchedAtom } from '../fetchedAtom';
-import { interiorPhotos } from '../photosAtoms';
 import useGetPhotos from '../getPhotos';
-
+import { interiorPhotos } from '../photosAtoms';
 const Interior = () => {
   const { year, model, id } = useParams();
   let modelShort = model?.split(' ')[1];

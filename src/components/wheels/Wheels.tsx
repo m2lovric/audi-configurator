@@ -1,7 +1,6 @@
-import React from 'react';
-import { useRecoilState } from 'recoil';
 import cancel from '@/assets/X.png';
-import { wheelsAtom, totalPriceAtom } from 'modules/state/index';
+import { totalPriceAtom, wheelsAtom } from '@/modules/state/index';
+import { useRecoilState } from 'recoil';
 import useGetPhotos from '../getPhotos';
 import useHandleCancel from './useHandleCancel';
 import useWheelsChange from './useWheelsChange';

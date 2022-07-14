@@ -1,25 +1,25 @@
-import { Layout } from './components';
-import './app.scss';
-import car from './assets/front-left-2.png';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { db } from '@/modules/firebase/index';
+import { Model } from '@/modules/interfaces/model';
 import {
   configModelsAtom,
   userConfigurationAtom,
-  userStateAtom,
   userIdAtom,
-} from 'modules/state/index';
-import { useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+  userStateAtom,
+} from '@/modules/state/index';
 import {
-  getDocs,
   collection,
-  DocumentData,
-  doc,
   deleteDoc,
+  doc,
+  DocumentData,
+  getDocs,
 } from 'firebase/firestore';
-import { db } from 'modules/firebase/index';
-import { Model } from 'modules/interfaces/model';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import './app.scss';
+import car from './assets/front-left-2.png';
 import dots from './assets/Union.svg';
+import { Layout } from './components';
 
 function App() {
   const userState = useRecoilValue(userStateAtom);

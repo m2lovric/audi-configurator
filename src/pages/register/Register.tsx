@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import { Layout } from '@/components';
-import './style.scss';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { userStateAtom } from 'modules/state/index';
+import { userStateAtom } from '@/modules/state/index';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { userDataAtom } from './userData';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import './style.scss';
 import useHandleSubmit from './useHandleSubmit';
+import { userDataAtom } from './userData';
 
 const Register = () => {
   const [data, setData] = useRecoilState(userDataAtom);

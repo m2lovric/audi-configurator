@@ -1,7 +1,6 @@
-import React from 'react';
-import { storage } from 'modules/firebase';
+import { storage } from '@/modules/firebase';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { RecoilState, useRecoilState, useRecoilValue } from 'recoil';
+import { RecoilState, useRecoilState } from 'recoil';
 import { fetchedAtom } from './fetchedAtom';
 
 const useGetPhotos = (

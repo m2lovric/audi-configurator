@@ -1,8 +1,7 @@
-import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { colorsAtom, totalPriceAtom } from 'modules/state/index';
-import '../accessories.scss';
 import cancel from '@/assets/X.png';
+import { colorsAtom, totalPriceAtom } from '@/modules/state/index';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import '../accessories.scss';
 import useGetPhotos from '../getPhotos';
 import useColorChange from './useColorChange';
 import useHandleCancel from './useHandleCancel';

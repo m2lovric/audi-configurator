@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { db } from '@/modules/firebase';
+import { Model } from '@/modules/interfaces/model';
+import { selectModelAtom } from '@/modules/state';
+import { collection, getDocs } from 'firebase/firestore';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { modelsAtom } from './models';
-import { Model } from 'modules/interfaces/model';
-import { selectModelAtom } from 'modules/state';
-import { getDocs, collection, DocumentData } from 'firebase/firestore';
-import { db } from 'modules/firebase';
 
 const useFetchData = () => {
   const [models, setModels] = useRecoilState(modelsAtom);

@@ -1,28 +1,28 @@
-import React, { useEffect, useState } from 'react';
 import {
-  Layout,
-  ConfiguratorNav,
-  Wheels,
   Colors,
+  ConfiguratorNav,
   InteriorColors,
+  Layout,
+  Wheels,
 } from '@/components';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { auth, db, storage } from '@/modules/firebase';
 import {
   colorsAtom,
   interiorAtom,
   totalPriceAtom,
   userConfigurationAtom,
   wheelsAtom,
-} from 'modules/state/index';
+} from '@/modules/state/index';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { storage, db, auth } from 'modules/firebase';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { v4 as uuidv4 } from 'uuid';
 import { sides } from '../exterior/Exterior';
 import './summary.scss';
-import { doc, setDoc } from 'firebase/firestore';
-import { v4 as uuidv4 } from 'uuid';
-import { onAuthStateChanged } from 'firebase/auth';
 
 const Summary = () => {
   const { year, model, id } = useParams();

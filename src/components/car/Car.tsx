@@ -1,7 +1,6 @@
-import React from 'react';
+import { CarInterface } from '@/modules/interfaces/car';
 import { Link } from 'react-router-dom';
 import './car.scss';
-import { CarInterface } from 'modules/interfaces/car';
 import useUpdate from './useUpdate';
 
 const Car = ({ data }: CarInterface) => {

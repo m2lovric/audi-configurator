@@ -1,13 +1,12 @@
-import React from 'react';
-import { auth } from '@/../modules/firebase';
-import { userStateAtom } from '@/../modules/state';
+import { auth } from '@/modules/firebase';
+import { userStateAtom } from '@/modules/state';
 import {
-  signInWithPopup,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { atom, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userDataAtom } from './userData';
 
 const useHandleLogin = () => {

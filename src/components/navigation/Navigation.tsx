@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import logo from '../../assets/logo.svg';
 import hamburger from '@/assets/hamburger.svg';
-import './style.scss';
+import { auth } from '@/modules/firebase';
+import { userIdAtom, userStateAtom } from '@/modules/state/index';
+import { onAuthStateChanged, signOut, User } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { onAuthStateChanged, User, signOut } from 'firebase/auth';
-import { auth } from 'modules/firebase';
 import { useRecoilState } from 'recoil';
-import { userIdAtom, userStateAtom } from 'modules/state/index';
+import logo from '../../assets/logo.svg';
+import './style.scss';
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();

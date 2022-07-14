@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { Layout } from '@/components';
-import './login.scss';
-import { userStateAtom } from 'modules/state/index';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { Link, useNavigate } from 'react-router-dom';
 import googleImg from '@/assets/btn_google_signin_light_normal_web.png';
+import { Layout } from '@/components';
+import { userStateAtom } from '@/modules/state/index';
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import './login.scss';
 import useHandleLogin from './services';
 import { userDataAtom } from './userData';
 

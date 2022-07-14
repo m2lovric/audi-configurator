@@ -1,5 +1,4 @@
-import React from 'react';
-import { totalPriceAtom, userConfigurationAtom } from '@/../modules/state';
+import { totalPriceAtom, userConfigurationAtom } from '@/modules/state';
 import { useRecoilState } from 'recoil';
 
 const useColorChange = () => {

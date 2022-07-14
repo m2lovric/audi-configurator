@@ -1,8 +1,7 @@
-import React from 'react';
+import { interiorAtom, totalPriceAtom } from '@/modules/state/index';
 import { useRecoilState } from 'recoil';
-import { interiorAtom, totalPriceAtom } from 'modules/state/index';
-import '../accessories.scss';
 import cancel from '../../assets/X.png';
+import '../accessories.scss';
 import useGetPhotos from '../getPhotos';
 import useHandleCancel from './useHandleCancel';
 import useInteriorChange from './useInteriorChange';

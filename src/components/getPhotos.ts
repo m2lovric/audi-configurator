@@ -1,7 +1,7 @@
-import { storage } from '@/../modules/firebase';
+import { storage } from '@/modules/firebase';
+import { configModelsAtom } from '@/modules/state';
 import { getDownloadURL, ref } from 'firebase/storage';
-import { configModelsAtom } from 'modules/state';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 
 const useGetPhotos = () => {

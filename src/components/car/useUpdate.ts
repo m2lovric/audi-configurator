@@ -1,14 +1,12 @@
-import React from 'react';
-import { Model } from 'modules/interfaces/model';
+import { Model } from '@/modules/interfaces/model';
 import {
+  colorsAtom,
+  interiorAtom,
   selectModelAtom,
   userConfigurationAtom,
-  colorsAtom,
   wheelsAtom,
-  interiorAtom,
-} from 'modules/state/';
+} from '@/modules/state';
 import { useRecoilState } from 'recoil';
-import { CarInterface } from '@/../modules/interfaces/car';
 
 const useUpdate = () => {
   const [selectModels, setSelectModels] =

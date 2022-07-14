@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Layout, ConfiguratorNav, Colors, Wheels } from '@/components';
-import { db, storage } from 'modules/firebase';
-import { ref, getDownloadURL } from 'firebase/storage';
-import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
-import './exterior.scss';
-import { collection, getDocs } from 'firebase/firestore';
-import { selector, useRecoilState, useRecoilValue } from 'recoil';
+import { Colors, ConfiguratorNav, Layout, Wheels } from '@/components';
+import { db } from '@/modules/firebase';
+import { modelConfig } from '@/modules/interfaces/modelConfig';
 import {
   colorsAtom,
   configModelsAtom,
-  wheelsAtom,
-  visibleAtom,
-  visibleAtomA,
-  userConfigurationAtom,
   interiorAtom,
   totalPriceAtom,
-} from 'modules/state/index';
-import { modelConfig } from 'modules/interfaces/modelConfig';
+  userConfigurationAtom,
+  visibleAtom,
+  visibleAtomA,
+  wheelsAtom,
+} from '@/modules/state/index';
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { selector, useRecoilState, useRecoilValue } from 'recoil';
 import useGetPhotos from '../getPhotos';
 import { exteriorPhotos } from '../photosAtoms';
+import './exterior.scss';
 
 export const sides = [
   { id: 1, view: 'Front Left' },
