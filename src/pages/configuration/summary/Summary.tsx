@@ -84,7 +84,7 @@ const Summary = () => {
 
   return (
     <Layout>
-      <ConfiguratorNav model={model} year={year} active={'summary'} />
+      <ConfiguratorNav model={model} year={year} id={id} active={'summary'} />
       <section className='summary'>
         <h1 className='summary__title'>Almost done!</h1>
         <p className='summary__subtitle'>

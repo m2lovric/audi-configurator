@@ -1,11 +1,13 @@
 import { Car, Layout } from '@/components';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
+import { useParams } from 'react-router-dom';
 import './select.scss';
 import useFetchData from './useFetchData';
 
 const Select = () => {
   const [models, selectModels] = useFetchData();
+  const { year, model, id } = useParams();
 
   return (
     <Layout>
@@ -32,7 +34,7 @@ const Select = () => {
               ? models.map((el: any) => {
                   return (
                     <SplideSlide key={el.id}>
-                      <Car data={el} />
+                      <Car data={el} id={id} />
                     </SplideSlide>
                   );
                 })

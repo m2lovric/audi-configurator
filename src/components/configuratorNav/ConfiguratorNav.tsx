@@ -1,14 +1,21 @@
+import { colorsAtom, wheelsAtom, interiorAtom } from '@/modules/state';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 import './configuratorNav.scss';
 
 interface ConfiguratorNavI {
   model?: string;
   year?: string;
+  id?: string | undefined;
   active?: string;
 }
 
-const ConfiguratorNav = ({ model, year, active }: ConfiguratorNavI) => {
+const ConfiguratorNav = ({ model, year, id, active }: ConfiguratorNavI) => {
+  const [colorsState, setColorState] = useRecoilState(colorsAtom);
+  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
+  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
+
   return (
     <nav className='configurator-nav'>
       <section className='configurator-nav__container'>
@@ -19,18 +26,22 @@ const ConfiguratorNav = ({ model, year, active }: ConfiguratorNavI) => {
 
         <section>
           <NavLink
-            to={`/configure/exterior/${year}/${model}`}
+            to={`/configure/exterior/${year}/${model}/${id}`}
             style={
               active == 'exterior'
                 ? { color: '#2E2E38', fontWeight: 700 }
                 : { color: '#2E2E38', fontWeight: 400 }
             }
             className='configurator-nav__links'
+            onClick={() => {
+              setColorState([]);
+              setWheelsState([]);
+            }}
           >
             01 Exterior
           </NavLink>
           <NavLink
-            to={`/configure/interior/${year}/${model}`}
+            to={`/configure/interior/${year}/${model}/${id}`}
             style={
               active == 'interior'
                 ? { color: '#2E2E38', fontWeight: 700 }
@@ -41,13 +52,16 @@ const ConfiguratorNav = ({ model, year, active }: ConfiguratorNavI) => {
             02 Interior
           </NavLink>
           <NavLink
-            to={`/configure/summary/${year}/${model}`}
+            to={`/configure/summary/${year}/${model}/${id}`}
             style={
               active == 'summary'
                 ? { color: '#2E2E38', fontWeight: 700 }
                 : { color: '#2E2E38', fontWeight: 400 }
             }
             className='configurator-nav__links'
+            onClick={() => {
+              setInteriorState([]);
+            }}
           >
             03 Summary
           </NavLink>

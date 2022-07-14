@@ -53,7 +53,7 @@ const Interior = () => {
 
   return (
     <Layout>
-      <ConfiguratorNav model={model} year={year} active={'interior'} />
+      <ConfiguratorNav model={model} year={year} id={id} active={'interior'} />
       <section className='exterior'>
         <section className='exterior__slider'>
           <Splide hasTrack={false}>

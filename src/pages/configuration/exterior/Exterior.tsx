@@ -95,7 +95,7 @@ const Exterior = () => {
 
   return (
     <Layout>
-      <ConfiguratorNav model={model} year={year} active={'exterior'} />
+      <ConfiguratorNav model={model} year={year} id={id} active={'exterior'} />
       <section className='exterior'>
         <section className='exterior__slider'>
           <Splide hasTrack={false}>
