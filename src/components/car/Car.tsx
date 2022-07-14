@@ -1,4 +1,3 @@
-import { CarInterface } from '@/modules/interfaces/car';
 import { Link, useParams } from 'react-router-dom';
 import './car.scss';
 import useUpdate from './useUpdate';

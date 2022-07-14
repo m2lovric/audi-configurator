@@ -1,4 +1,4 @@
-export interface CarInterface {
+export interface Car {
   id: string;
   image: string;
   model: string;
