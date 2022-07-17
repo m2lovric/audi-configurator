@@ -15,7 +15,12 @@ import '@splidejs/react-splide/css';
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { selector, useRecoilState, useRecoilValue } from 'recoil';
+import {
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
 import useGetPhotos from '../getPhotos';
 import { exteriorPhotos } from '../photosAtoms';
 import './exterior.scss';
@@ -44,15 +49,12 @@ const Exterior = () => {
 
   const { colorsState, wheelsState } = useRecoilValue(accessoriesState);
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
-  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
+  const setInteriorState = useSetRecoilState(interiorAtom);
 
   const [visible, setVisible] = useRecoilState(visibleAtom);
   const [fetched, setFetched] = useState(false);
-  const [modelConfig, setModelConfig] =
-    useRecoilState<modelConfig>(configModelsAtom);
-  const [selectedValues, setSelectedValues] = useRecoilState(
-    userConfigurationAtom
-  );
+  const setModelConfig = useSetRecoilState<modelConfig>(configModelsAtom);
+  const selectedValues = useRecoilValue(userConfigurationAtom);
   const [handleGetPhotos, sortPhotos] = useGetPhotos(exteriorPhotos);
   const [photos, setPhotos] = useRecoilState(exteriorPhotos);
 

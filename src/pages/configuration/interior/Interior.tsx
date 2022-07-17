@@ -11,7 +11,7 @@ import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import '../exterior/exterior.scss';
 import { fetchedAtom } from '../fetchedAtom';
 import useGetPhotos from '../getPhotos';
@@ -25,10 +25,10 @@ const Interior = () => {
     { id: 2, view: 'Seats' },
   ];
 
-  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
-  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
-  const [colorsState, setColorState] = useRecoilState(colorsAtom);
-  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
+  const totalPrice = useRecoilValue(totalPriceAtom);
+  const interiorState = useRecoilValue(interiorAtom);
+  const setColorState = useSetRecoilState(colorsAtom);
+  const setWheelsState = useSetRecoilState(wheelsAtom);
   const [visibleInterior, setVisibleInterior] =
     useRecoilState(visibleInteriorAtom);
   const fetched = useRecoilValue(fetchedAtom);

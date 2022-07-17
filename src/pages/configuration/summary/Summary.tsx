@@ -60,7 +60,6 @@ const Summary = () => {
 
   useEffect(() => {
     setAccesories([]);
-    console.log(accessories, setAccesories);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -91,11 +90,15 @@ const Summary = () => {
     const uid = uuidv4();
     const getId = id == undefined || id == 'undefined' ? uid : id;
 
-    await setDoc(doc(db, user, getId), {
-      ...selectedValues,
-      sideUrl: sidePhoto,
-      createdAt: new Date().toDateString(),
-    });
+    await setDoc(
+      doc(db, user, getId),
+      {
+        ...selectedValues,
+        sideUrl: sidePhoto,
+        createdAt: new Date().toDateString(),
+      },
+      { merge: true }
+    );
     navigate('/');
   };
 
