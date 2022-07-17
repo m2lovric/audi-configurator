@@ -44,37 +44,37 @@ const Navigation = () => {
           <img src={logo} alt='logo' />
         </Link>
 
-        <section className='nav__menu'>
+        <nav className='nav__menu'>
           <img src={hamburger} alt='menu' onClick={() => setMenu(!menu)} />
           {user ? (
-            <section
+            <ul
               className='list'
               style={menu ? { display: 'block' } : { display: 'none' }}
             >
-              <article className='list__section'>
+              <li className='list__section'>
                 <Link to={'/'} className='text'>
                   My saved configurations
                 </Link>
-              </article>
-              <article className='list__section'>
+              </li>
+              <li className='list__section'>
                 <p className='text' onClick={() => handleLogout()}>
                   Logout
                 </p>
-              </article>
-            </section>
+              </li>
+            </ul>
           ) : (
-            <section
+            <ul
               className='list'
               style={menu ? { display: 'block' } : { display: 'none' }}
             >
-              <article className='list__section'>
+              <li className='list__section'>
                 <Link to={'/login'} className='text'>
                   Login
                 </Link>
-              </article>
-            </section>
+              </li>
+            </ul>
           )}
-        </section>
+        </nav>
       </section>
     </nav>
   );

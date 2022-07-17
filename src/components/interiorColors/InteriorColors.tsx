@@ -27,22 +27,24 @@ const Colors = () => {
           <img src={cancel} alt='cancel' />
         </button>
       </section>
-      {interiorColors &&
-        interiorColors.map((el) => {
-          return (
-            <article
-              key={el.name}
-              className='accessories'
-              onClick={() => onInteriorChange(el)}
-            >
-              <img src={el.url} alt='' />
-              <section className='accessories__text'>
-                <p className='accessories__name'>{el.name}</p>
-                <p className='accessories__price'>{el.price}</p>
-              </section>
-            </article>
-          );
-        })}
+      <ul>
+        {interiorColors &&
+          interiorColors.map((el) => {
+            return (
+              <li
+                key={el.name}
+                className='accessories'
+                onClick={() => onInteriorChange(el)}
+              >
+                <img src={el.url} alt='' />
+                <section className='accessories__text'>
+                  <p className='accessories__name'>{el.name}</p>
+                  <p className='accessories__price'>{el.price}</p>
+                </section>
+              </li>
+            );
+          })}
+      </ul>
       <section className='colors__total'>
         <p className='text'>TOTAL</p>
         <p className='price'>{totalPrice}&euro;</p>

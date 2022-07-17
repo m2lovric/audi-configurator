@@ -23,24 +23,24 @@ const Wheels = () => {
           <img src={cancel} alt='cancel' />
         </button>
       </section>
-
-      {wheels &&
-        wheels.map((el) => {
-          return (
-            <article
-              key={el.name}
-              className='accessories'
-              onClick={() => onWheelChange(el)}
-            >
-              <img src={el.url} alt='' />
-              <section className='accessories__text'>
-                <p className='accessories__name'>{el.name}</p>
-                <p className='accessories__price'>{el.price}</p>
-              </section>
-            </article>
-          );
-        })}
-
+      <ul>
+        {wheels &&
+          wheels.map((el) => {
+            return (
+              <li
+                key={el.name}
+                className='accessories'
+                onClick={() => onWheelChange(el)}
+              >
+                <img src={el.url} alt='' />
+                <section className='accessories__text'>
+                  <p className='accessories__name'>{el.name}</p>
+                  <p className='accessories__price'>{el.price}</p>
+                </section>
+              </li>
+            );
+          })}
+      </ul>
       <section className='colors__total'>
         <p>TOTAL</p>
         <p>{totalPrice}&euro;</p>
