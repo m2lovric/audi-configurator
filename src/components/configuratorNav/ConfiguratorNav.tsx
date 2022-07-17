@@ -1,7 +1,7 @@
 import { colorsAtom, wheelsAtom, interiorAtom } from '@/modules/state';
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import './configuratorNav.scss';
 
 interface ConfiguratorNavI {
@@ -12,9 +12,9 @@ interface ConfiguratorNavI {
 }
 
 const ConfiguratorNav = ({ model, year, id, active }: ConfiguratorNavI) => {
-  const [colorsState, setColorState] = useRecoilState(colorsAtom);
-  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
-  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
+  const setColorState = useSetRecoilState(colorsAtom);
+  const setWheelsState = useSetRecoilState(wheelsAtom);
+  const setInteriorState = useSetRecoilState(interiorAtom);
 
   return (
     <nav className='configurator-nav'>

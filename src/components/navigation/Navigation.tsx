@@ -4,14 +4,14 @@ import { userIdAtom, userStateAtom } from '@/modules/state/index';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import logo from '../../assets/logo.svg';
 import './style.scss';
 
 const Navigation = () => {
   const [user, setUser] = useState<User>();
-  const [userState, setUserState] = useRecoilState(userStateAtom);
-  const [userId, setUserId] = useRecoilState(userIdAtom);
+  const setUserState = useSetRecoilState(userStateAtom);
+  const setUserId = useSetRecoilState(userIdAtom);
   const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 

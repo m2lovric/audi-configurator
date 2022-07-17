@@ -1,5 +1,5 @@
 import { interiorAtom, totalPriceAtom } from '@/modules/state/index';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import cancel from '../../assets/X.png';
 import '../accessories.scss';
 import useGetPhotos from '../getPhotos';
@@ -10,7 +10,7 @@ const Colors = () => {
   const [getPhotos] = useGetPhotos();
   const [handleCancel] = useHandleCancel();
   const [onInteriorChange] = useInteriorChange();
-  const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
+  const totalPrice = useRecoilValue(totalPriceAtom);
 
   const [interiorColors, setInteriorColors] =
     useRecoilState<{ name: string; url: string; price: number }[]>(
