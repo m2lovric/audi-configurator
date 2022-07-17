@@ -19,19 +19,37 @@ import { doc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { selector, useRecoilState } from 'recoil';
 import { v4 as uuidv4 } from 'uuid';
 import { sides } from '../exterior/Exterior';
 import './summary.scss';
+
+const accessoriesState = selector({
+  key: 'accesoriesState',
+  get: ({ get }) => {
+    const colorsState = get(colorsAtom);
+    const wheelsState = get(wheelsAtom);
+    const interiorState = get(interiorAtom);
+
+    return {
+      colors: colorsState,
+      wheels: wheelsState,
+      interior: interiorState,
+    };
+  },
+  set: ({ set, get }, newValue: any) => {
+    set(colorsAtom, newValue);
+    set(wheelsAtom, newValue);
+    set(interiorAtom, newValue);
+  },
+});
 
 const Summary = () => {
   const { year, model, id } = useParams();
   const modelShort = model?.split(' ')[1];
 
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceAtom);
-  const [colorsState, setColorState] = useRecoilState(colorsAtom);
-  const [wheelsState, setWheelsState] = useRecoilState(wheelsAtom);
-  const [interiorState, setInteriorState] = useRecoilState(interiorAtom);
+  const [accessories, setAccesories] = useRecoilState(accessoriesState);
   const [selectedValues, setSelectedValues] = useRecoilState(
     userConfigurationAtom
   );
@@ -41,9 +59,8 @@ const Summary = () => {
   const [sidePhoto, setSidePhoto] = useState('');
 
   useEffect(() => {
-    setColorState([]);
-    setWheelsState([]);
-    setInteriorState([]);
+    setAccesories([]);
+    console.log(accessories, setAccesories);
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -139,19 +156,19 @@ const Summary = () => {
                 <Link
                   to={`/configure/exterior/${year}/${model}/${id}`}
                   onClick={() => {
-                    setColorState([]);
-                    setWheelsState([]);
+                    setAccesories([]);
                   }}
                 >
                   Edit
                 </Link>
               </nav>
               <section>
-                {colorsState
+                {accessories.colors
                   .filter(
-                    (el) => el.name === selectedValues.accessories.color.name
+                    (el: any) =>
+                      el.name === selectedValues.accessories.color.name
                   )
-                  .map((el) => {
+                  .map((el: any) => {
                     return (
                       <article key={el.name} className='accessories'>
                         <img
@@ -176,13 +193,13 @@ const Summary = () => {
                 </div>
               </section>
               <section>
-                {wheelsState
+                {accessories.wheels
                   .filter(
-                    (el) =>
+                    (el: any) =>
                       el.name ===
                       `Car=${modelShort}, ${selectedValues.accessories.wheel.name}`
                   )
-                  .map((el) => {
+                  .map((el: any) => {
                     return (
                       <article key={el.name} className='accessories'>
                         <img
@@ -213,18 +230,19 @@ const Summary = () => {
                 <p>Interior</p>
                 <Link
                   to={`/configure/interior/${year}/${model}/${id}`}
-                  onClick={() => setInteriorState([])}
+                  onClick={() => setAccesories([])}
                 >
                   Edit
                 </Link>
               </nav>
 
               <section>
-                {interiorState
+                {accessories.interior
                   .filter(
-                    (el) => el.name === selectedValues.accessories.interior.name
+                    (el: any) =>
+                      el.name === selectedValues.accessories.interior.name
                   )
-                  .map((el) => {
+                  .map((el: any) => {
                     return (
                       <article key={el.name} className='accessories'>
                         <img
